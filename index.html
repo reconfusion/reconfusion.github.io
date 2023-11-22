@@ -42,16 +42,29 @@
     
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
+
+    <script src="js/video_handler.js"></script>
+
+    <script>
+        function selectCompVideo() {
+          var scene = document.getElementById("scene_btn").value;
+          var method = document.getElementById("method_btn").value;
+          var video = document.getElementById("compVideo");
+          console.log(video.videoWidth);
+          video.src = "videos/" + scene + "_" + method + ".mp4";
+        }
+    </script>
+
 </head>
 
 <body>
     <div class="container" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                <b>Zip-NeRF</b>: Anti-Aliased Grid-Based Neural Radiance Fields</br> 
-                <small>
+                <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
+                <!-- <small>
                 ICCV 2023 (Oral Presentation, Best Paper Finalist)
-                </small>
+                </small> -->
             </h2>
         </div>
         <div class="row">
@@ -124,13 +137,14 @@
                     Abstract
                 </h3>
                 <p class="text-justify">
-Neural Radiance Field training can be accelerated through the use of grid-based representations in NeRF's learned mapping from spatial coordinates to colors and volumetric density. However, these grid-based approaches lack an explicit understanding of scale and therefore often introduce aliasing, usually in the form of jaggies or missing scene content. Anti-aliasing has previously been addressed by mip-NeRF 360, which reasons about sub-volumes along a cone rather than points along a ray, but this approach is not natively compatible with current grid-based techniques. We show how ideas from rendering and signal processing can be used to construct a technique that combines mip-NeRF 360 and grid-based models such as Instant NGP to yield error rates that are 8%-77% lower than either prior technique, and that trains 24x faster than mip-NeRF 360.
+                    3D reconstruction methods such as Neural Radiance Fields (NeRFs) excel at rendering photorealistic novel views of complex scenes. However, recovering a high-quality NeRF typically requires tens to hundreds of input images, resulting in a time-consuming capture process. We present ReconFusion to reconstruct real-world scenes using only a few photos. Our approach leverages a diffusion prior for novel view synthesis, trained on synthetic and multiview datasets, which regularizes a NeRF-based 3D reconstruction pipeline at novel camera poses beyond those captured by the set of input images. Our method synthesizes realistic geometry and texture in underconstrained regions while preserving the appearance of observed regions. We perform an extensive evaluation across various real-world datasets, including forward-facing and 360-degree scenes, demonstrating significant performance improvements over previous few-view NeRF reconstruction approaches.
                 </p>
             </div>
         </div>
+        <br>
 
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Video
@@ -141,9 +155,9 @@ Neural Radiance Field training can be accelerated through the use of grid-based 
                     </div>
                 </div>
             </div>
-        </div>
-<br>
-        <div class="row">
+        </div> -->
+<!-- <br> -->
+        <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     360° Video Flythroughs
@@ -151,13 +165,13 @@ Neural Radiance Field training can be accelerated through the use of grid-based 
                 <div class="text-center">
                     <div style="position:relative;padding-top:56.25%;">
                         <iframe src="https://www.youtube.com/embed/videoseries?list=PLzPoYEE6Aw7Jzjek1uEIPnpcTDL3u8tb4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                        <!-- <iframe src="https://youtube.com/embed/jbE2ri8xEZo" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe> -->
+                        <iframe src="https://youtube.com/embed/jbE2ri8xEZo" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
                 </div>
             </div>
-        </div>
-<br>
-        <div class="row">
+        </div> -->
+<!-- <br> -->
+        <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Multisampling
@@ -184,31 +198,76 @@ Neural Radiance Field training can be accelerated through the use of grid-based 
                     We use multisampling to approximate the average NGP feature over a conical frustum, by constructing a 6-sample pattern that exactly matches the frustum's first and second moments. When training, we randomly rotate and flip (along the ray axis) each pattern, and when rendering we deterministically flip and rotate each adjacent pattern by 30 degrees.
                 </p>
             </div>
-        </div>
-<br>
+        </div> -->
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    XY aliasing
+                    Comparisons
                 </h3>
-                <video class="video" width=100% id="xyalias" loop playsinline autoplay muted src="img/xy_alias_swipe_crf27.mp4" onplay="resizeAndPlay(this)"></video>
-                <canvas height=0 class="videoMerge" id="xyaliasMerge"></canvas>
+                <label id="scene_label">Scene:</label>
+                <select name="scene" id="scene_btn" onchange="selectCompVideo()">
+                    <option value="bicycle">Bicycle</option>
+                    <option value="hydrant">Hydrant</option>
+                </select>
+                &emsp;
+                
+                <label id="method_label">Compared method:</label>
+                <select name="method" id="method_btn" onchange="selectCompVideo()">
+                    <option value="zipnerf">Zip-NeRF</option>
+                    <option value="zeronvs">ZeroNVS</option>
+                </select>
+
+                <!-- <video class="video" width=100% id="compVideo" loop playsinline autoplay muted src="videos/bicycle_zipnerf.mp4"></video>
+                <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
+                <video class="video" width=100% id="compVideo" loop playsinline autoplay muted src="videos/bicycle_zipnerf.mp4" onplay="resizeAndPlay(this)"></video>
+                <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
                 <p class="text-justify">
-                    A naive baseline (left) combining mip-NeRF 360 and Instant NGP results in aliasing as the camera moves laterally. Our full method (right) produces prefiltered renderings that do not flicker or shimmer.
+                    Baseline method (left) vs ReconFusion (right). TBA.
                 </p>
             </div>
         </div>
-           
+        <br>
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Z aliasing
+                    Samples from diffusion model
                 </h3>
                 <video id="v0" width="100%" autoplay loop muted>
-                  <source src="img/z_alias_pdf_labeled.m4v" type="video/mp4" />
+                <source src="img/z_alias_pdf_labeled.m4v" type="video/mp4" />
                 </video>
                 <p class="text-justify">
-                    The proposal network used for resampling points along rays in mip-NeRF 360 results in an artifact we refer to as <em>z-aliasing</em>, where foreground content alternately appears and disappears as the camera moves toward or away from scene content. Z-aliasing occurs when the initial set of samples from the proposal network is not dense enough and misses thin structures, such as the chair above. Missed content can not be recovered by later rounds of sampling, since no future samples will be placed at that location along the ray. Our improvements to proposal network supervision result in a prefiltered proposal output that preserves the foreground object for all frames in this sequence. The plots above depict samples along a ray for three rounds of resampling (blue, orange, and green lines), with the y axis showing rendering weight (how much each interval contributes to the final rendered color), as a normalized probability density.
+                    Compare ablations of our method. TBA. 
+                </p>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Different amount of sparsity
+                </h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                      <td style="text-align: center;">
+                          <video id="v0" width="100%" autoplay loop muted>
+                            <source src="img/hexify_train.mp4" type="video/mp4" />
+                          </video>
+                      </td>
+                      <td style="text-align: center;">
+                          <video id="v0" width="100%" autoplay loop muted>
+                            <source src="img/hexify_test.mp4" type="video/mp4" />
+                          </video>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center;">Frustums of input views</td>
+                      <td style="text-align: center;">Results</td>
+                    </tr>
+                </table>
+                <p class="text-justify">
+                    Our learned diffusion prior improves performance over the Zip-NeRF baseline up to as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset. TBA.
                 </p>
             </div>
         </div>
