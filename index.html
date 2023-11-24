@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Zip-NeRF</title>
+    <title>ReconFusion</title>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,13 +16,13 @@
     <meta property="og:image:width" content="1296">
     <meta property="og:image:height" content="840">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jonbarron.info/zipnerf/"/>
-    <meta property="og:title" content="Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields" />
-    <meta property="og:description" content="Neural Radiance Field training can be accelerated through the use of grid-based representations in NeRF's learned mapping from spatial coordinates to colors and volumetric density. However, these grid-based approaches lack an explicit understanding of scale and therefore often introduce aliasing, usually in the form of jaggies or missing scene content. Anti-aliasing has previously been addressed by mip-NeRF 360, which reasons about sub-volumes along a cone rather than points along a ray, but this approach is not natively compatible with current grid-based techniques. We show how ideas from rendering and signal processing can be used to construct a technique that combines mip-NeRF 360 and grid-based models such as Instant NGP to yield error rates that are 8%-77% lower than either prior technique, and that trains 24x faster than mip-NeRF 360." />
+    <meta property="og:url" content="https://reconfusion.github.io/"/>
+    <meta property="og:title" content="ReconFusion: 3D Reconstruction with Diffusion Priors" />
+    <meta property="og:description" content="3D reconstruction methods such as Neural Radiance Fields (NeRFs) excel at rendering photorealistic novel views of complex scenes. However, recovering a high-quality NeRF typically requires tens to hundreds of input images, resulting in a time-consuming capture process. We present ReconFusion to reconstruct real-world scenes using only a few photos. Our approach leverages a diffusion prior for novel view synthesis, trained on synthetic and multiview datasets, which regularizes a NeRF-based 3D reconstruction pipeline at novel camera poses beyond those captured by the set of input images. Our method synthesizes realistic geometry and texture in underconstrained regions while preserving the appearance of observed regions. We perform an extensive evaluation across various real-world datasets, including forward-facing and 360-degree scenes, demonstrating significant performance improvements over previous few-view NeRF reconstruction approaches."/>
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Zip-NeRF: Anti-Aliased Grid-Based Neural Radiance Fields" />
-    <meta name="twitter:description" content="Neural Radiance Field training can be accelerated through the use of grid-based representations in NeRF's learned mapping from spatial coordinates to colors and volumetric density. However, these grid-based approaches lack an explicit understanding of scale and therefore often introduce aliasing, usually in the form of jaggies or missing scene content. Anti-aliasing has previously been addressed by mip-NeRF 360, which reasons about sub-volumes along a cone rather than points along a ray, but this approach is not natively compatible with current grid-based techniques. We show how ideas from rendering and signal processing can be used to construct a technique that combines mip-NeRF 360 and grid-based models such as Instant NGP to yield error rates that are 8%-77% lower than either prior technique, and that trains 24x faster than mip-NeRF 360." />
+    <meta name="twitter:title" content="ReconFusion: 3D Reconstruction with Diffusion Priors" />
+    <meta name="twitter:description" content="3D reconstruction methods such as Neural Radiance Fields (NeRFs) excel at rendering photorealistic novel views of complex scenes. However, recovering a high-quality NeRF typically requires tens to hundreds of input images, resulting in a time-consuming capture process. We present ReconFusion to reconstruct real-world scenes using only a few photos. Our approach leverages a diffusion prior for novel view synthesis, trained on synthetic and multiview datasets, which regularizes a NeRF-based 3D reconstruction pipeline at novel camera poses beyond those captured by the set of input images. Our method synthesizes realistic geometry and texture in underconstrained regions while preserving the appearance of observed regions. We perform an extensive evaluation across various real-world datasets, including forward-facing and 360-degree scenes, demonstrating significant performance improvements over previous few-view NeRF reconstruction approaches."/>
     <meta name="twitter:image" content="https://jonbarron.info/zipnerf/img/teaser.jpg" />
 
 
@@ -39,19 +39,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
-    
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
-
-    <script src="js/video_handler.js"></script>
 
     <script>
         function selectCompVideo() {
           var scene = document.getElementById("scene_btn").value;
           var method = document.getElementById("method_btn").value;
           var video = document.getElementById("compVideo");
-          console.log(video.videoWidth);
-          video.src = "videos/" + scene + "_" + method + ".mp4";
+          video.src = "videos/" + scene + "_" + method + "_vs_ours.mp4";
         }
     </script>
 
@@ -62,41 +62,75 @@
         <div class="row">
             <h2 class="col-md-12 text-center">
                 <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
-                <!-- <small>
-                ICCV 2023 (Oral Presentation, Best Paper Finalist)
-                </small> -->
             </h2>
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
                 <ul class="list-inline">
                     <li>
-                        <a href="https://jonbarron.info/">
-                          Jonathan T. Barron
+                        <a href="https://www.cs.columbia.edu/~rundi/">
+                            Rundi Wu*<sup>1</sup>
                         </a>
                     </li>
                     <li>
                         <a href="http://bmild.github.io/">
-                            Ben Mildenhall
+                            Ben Mildenhall*<sup>2</sup>
                         </a>
                     </li>
                     <li>
-                        <a href="http://dorverbin.github.io/">
-                          Dor Verbin
+                        <a href="https://henzler.github.io/">
+                            Philipp Henzler<sup>2</sup>
                         </a>
                     </li>
+                    <li>
+                        <a href="https://keunhong.com/">
+                            Keunhong Park<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ruiqigao.github.io/">
+                            Ruiqi Gao<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com/citations?user=_pKKv2QAAAAJ&hl=en/">
+                            Daniel Watson<sup>2</sup>
+                        </a>
+                    </li>
+                    <br>
                     <li>
                         <a href="https://pratulsrinivasan.github.io/">
-                          Pratul P. Srinivasan
+                            Pratul P. Srinivasan<sup>2</sup>
                         </a>
                     </li>
                     <li>
-                        <a href="https://phogzone.com/">
-                          Peter Hedman
+                        <a href="https://dorverbin.github.io/">
+                            Dor Verbin<sup>2</sup>
                         </a>
                     </li>
-                    </br>Google
+                    <li>
+                        <a href="https://jonbarron.info/">
+                            Jonathan T. Barron<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://poolio.github.io/">
+                            Ben Poole<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://holynski.org/">
+                            Aleksander Holynski*<sup>2</sup>
+                        </a>
+                    </li>
+                    <!-- </br>Google -->
                 </ul>
+            </div>
+            <div class="col-md-12 text-center">
+                <sup>1</sup>Columbia University, &nbsp <sup>2</sup>Google Research
+            </div>
+            <div class="col-md-12 text-center">
+                *Denotes equal contribution
             </div>
         </div>
 
@@ -171,59 +205,59 @@
             </div>
         </div> -->
 <!-- <br> -->
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Multisampling
+                    ReconFusion
                 </h3>
-				<table style="width: 100%; border-collapse: collapse;">
-				  <tr>
-				    <td style="text-align: center;">
-		                <video id="v0" width="100%" autoplay loop muted>
-		                  <source src="img/hexify_train.mp4" type="video/mp4" />
-		                </video>
-					</td>
-				    <td style="text-align: center;">
-		                <video id="v0" width="100%" autoplay loop muted>
-		                  <source src="img/hexify_test.mp4" type="video/mp4" />
-		                </video>
-					</td>
-				  </tr>
-				  <tr>
-				    <td style="text-align: center;">When Training</td>
-				    <td style="text-align: center;">When Rendering</td>
-				  </tr>
-				</table>
+                <image src="img/overview_combined.png" width=100%></image>
                 <p class="text-justify">
-                    We use multisampling to approximate the average NGP feature over a conical frustum, by constructing a 6-sample pattern that exactly matches the frustum's first and second moments. When training, we randomly rotate and flip (along the ray axis) each pattern, and when rendering we deterministically flip and rotate each adjacent pattern by 30 degrees.
+                    (a) We optimize a NeRF to minimize a reconstruction loss \(\mathcal{L}_\mathrm{recon}\) between renderings and a few input images, as well as a sample loss \(\mathcal{L}_\mathrm{sample}\) between a rendering from a random pose and an image predicted by a diffusion model for that pose. (b) To generate the sample image, we use a PixelNeRF-style model to fuse information from the input images and to render a predicted feature map corresponding to the sample view camera pose. (c) This feature map is concatenated with the noisy latent (computed from the current NeRF rendering at that pose) and is provided to a diffusion model, which additionally uses CLIP embeddings of the input images via cross-attention. The resulting decoded output sample is used to enforce an image-space loss on the corresponding NeRF rendering (\(\mathcal{L}_\mathrm{sample}\)).
                 </p>
             </div>
-        </div> -->
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Comparisons
                 </h3>
-                <label id="scene_label">Scene:</label>
-                <select name="scene" id="scene_btn" onchange="selectCompVideo()">
-                    <option value="bicycle">Bicycle</option>
-                    <option value="hydrant">Hydrant</option>
-                </select>
-                &emsp;
-                
-                <label id="method_label">Compared method:</label>
-                <select name="method" id="method_btn" onchange="selectCompVideo()">
-                    <option value="zipnerf">Zip-NeRF</option>
-                    <option value="zeronvs">ZeroNVS</option>
-                </select>
 
-                <!-- <video class="video" width=100% id="compVideo" loop playsinline autoplay muted src="videos/bicycle_zipnerf.mp4"></video>
-                <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
-                <video class="video" width=100% id="compVideo" loop playsinline autoplay muted src="videos/bicycle_zipnerf.mp4" onplay="resizeAndPlay(this)"></video>
-                <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
-                <p class="text-justify">
-                    Baseline method (left) vs ReconFusion (right). TBA.
-                </p>
+                <div class="text-center">
+                    <label id="method_label">Baseline method:</label>
+                    <select name="method" id="method_btn" onchange="selectCompVideo()">
+                        <option value="zipnerf">Zip-NeRF</option>
+                        <option value="diffusionerf">DiffusioNeRF</option>
+                        <option value="freenerf">FreeNeRF</option>
+                        <option value="simplenerf">SimpleNeRF</option>
+                        <option value="zeronvs">ZeroNVS</option>
+                    </select>
+                    &emsp;
+
+                    <label id="scene_label">Scene:</label>
+                    <select name="scene" id="scene_btn" onchange="selectCompVideo()">
+                        <option value="mipnerf360_bonsai">mip-NeRF 360/bonsai, 9 views</option>
+                        <option value="mipnerf360_kitchen">mip-NeRF 360/kitchen, 9 views</option>
+                        <option value="co3d_bench_185_19987_38634">CO3D/bench, 6 views</option>
+                        <option value="co3d_plant_188_20319_36755">CO3D/plant, 6 views</option>
+                        <option value="dtu_scan31">DTU/scan31, 3 views</option>
+                        <option value="dtu_scan45">DTU/scan45, 3 views</option>
+                        <option value="llff_fern">LLFF/fern, 3 views</option>
+                        <option value="llff_horns">LLFF/horns, 3 views</option>
+                        <option value="re10k_00beb03ef95dc637">Re10K/bedroom, 3 views</option>
+                        <option value="re10k_000c3ab189999a83">Re10K/living room, 3 views</option>
+                    </select>
+                </div>
+                
+                <div class="text-center">
+                    <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
+                        <source src="videos/mipnerf360_bonsai_zipnerf_vs_ours.mp4" />
+                    </video>
+                    <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
+                    <p class="text-justify" style="text-align: center;">
+                        Baseline method (left) vs our ReconFusion (right).
+                    </p>
+                </div>
             </div>
         </div>
         <br>
