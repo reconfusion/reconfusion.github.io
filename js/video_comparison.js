@@ -2,9 +2,7 @@
 // This is based on: http://thenewcode.com/364/Interactive-Before-and-After-Video-Comparison-in-HTML5-Canvas
 // With additional modifications based on: https://jsfiddle.net/7sk5k4gp/13/
 
-const targetHeight = 420
-
-function playVids(videoId) {
+function playVids(videoId, targetHeight=420) {
     var videoMerge = document.getElementById(videoId + "Merge");
     var vid = document.getElementById(videoId);
 
@@ -113,15 +111,16 @@ Number.prototype.clamp = function(min, max) {
 };
     
     
-function resizeAndPlay(element)
+function resizeAndPlay(element, targetHeight=420)
 {
   var cv = document.getElementById(element.id + "Merge");
 //   cv.width = element.videoWidth/2;
 //   cv.height = element.videoHeight;
+  
   cv.width = targetHeight / element.videoHeight * element.videoWidth/2;
   cv.height = targetHeight;
   element.play();
   element.style.height = "0px";  // Hide video without stopping it
     
-  playVids(element.id);
+  playVids(element.id, targetHeight);
 }

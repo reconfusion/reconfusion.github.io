@@ -42,6 +42,7 @@
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
@@ -282,26 +283,46 @@
                 <h3>
                     Different amount of sparsity
                 </h3>
-                <table style="width: 100%; border-collapse: collapse;">
+                <p class="text-justify" style="color:red">
+                    Hover over the plot to show rendered video under different number of views.
+                </p>
+                
+                <!-- top down layout -->
+                <canvas id="sparsityChart" style="max-height: 300px; max-width: 500px; margin: auto;"></canvas>
+                <script src="js/sparsity_chart.js"></script>
+    
+                <div class="text-center">
+                    <video class="video" width=100% id="sparsityVideo" loop playsinline autoplay muted onplay="playOnCanvas(this, 250)">
+                        <source src="videos/sparsity/kitchenlego_3.mp4" type="video/mp4" />
+                    </video>
+                    <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas>
+                    <div class="text-center">
+                        Rendered video under <span id="sparsityValue" style="color: red;">3</span> views
+                    </div>
+                </div>
+                
+                <!-- left right layout -->
+                <!-- <table style="width: 100%; border-collapse: collapse;">
                     <tr>
-                      <td style="text-align: center;">
-                          <video id="v0" width="100%" autoplay loop muted>
-                            <source src="img/#.mp4" type="video/mp4" />
-                          </video>
+                      <td style="text-align: center;" >
+                        <canvas id="sparsityChart" style="max-height: 250px; max-width: 200px; margin: auto;"></canvas>
+                        <script src="js/sparsity_chart.js"></script>
                       </td>
                       <td style="text-align: center;">
-                          <video id="v0" width="100%" autoplay loop muted>
-                            <source src="img/#.mp4" type="video/mp4" />
-                          </video>
+                        <video class="video" width=100% id="sparsityVideo" loop playsinline autoplay muted onplay="playOnCanvas(this, 180)">
+                            <source src="videos/sparsity/kitchenlego_3.mp4" type="video/mp4" />
+                        </video>
+                        <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas>
                       </td>
                     </tr>
                     <tr>
-                      <td style="text-align: center;">Frustums of input views</td>
-                      <td style="text-align: center;">Results</td>
+                      <td style="text-align: center;"></td>
+                      <td style="text-align: center;">Rendered video under <span id="sparsityValue" style="color: red;">3</span> views</td>
                     </tr>
-                </table>
+                </table> -->
+
                 <p class="text-justify">
-                    Our learned diffusion prior improves performance over the Zip-NeRF baseline up to as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset. TBA.
+                    Our learned diffusion prior improves performance over the Zip-NeRF baseline up to as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset.
                 </p>
             </div>
         </div>
