@@ -56,6 +56,59 @@
         }
     </script>
 
+<style>
+    .thumbnail-img {
+        max-width: 100%;
+        height: auto;
+        width: auto\9; /* IE8 */
+    }
+
+    .pill {
+        cursor: pointer;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .active-pill {
+        background-color: #e0e0e0; /* Adjust the color as needed */
+    }
+</style>
+
+
+<script>
+    // JavaScript to handle mouseover and mouseout events
+    var activeMethodPill = null;
+    var activeScenePill = null;
+
+    function selectCompVideo(method, scene, methodPill, scenePill) {
+        // Your existing logic for video selection
+        var video = document.getElementById("compVideo");
+        video.src = "videos/" + scene + "_" + method + "_vs_ours.mp4";
+
+        // Handling the active method pill
+        if (activeMethodPill) {
+            activeMethodPill.classList.remove("active-pill");
+        }
+        if (methodPill) {
+            methodPill.classList.add("active-pill");
+            activeMethodPill = methodPill;
+        }
+
+        // Handling the active scene pill
+        if (activeScenePill) {
+            activeScenePill.classList.remove("active-pill");
+        }
+        if (scenePill) {
+            scenePill.classList.add("active-pill");
+            activeScenePill = scenePill;
+        }
+    }
+</script>
+
 </head>
 
 <body>
@@ -71,12 +124,12 @@
                     <li>
                         <a href="https://www.cs.columbia.edu/~rundi/">
                             Rundi Wu
-                        </a><sup>1✱</sup>
+                        </a><sup>1*</sup>
                     </li>
                     <li>
                         <a href="http://bmild.github.io/">
                             Ben Mildenhall
-                        </a><sup>2✱</sup>
+                        </a><sup>2*</sup>
                     </li>
                     <li>
                         <a href="https://henzler.github.io/">
@@ -123,16 +176,16 @@
                     <li>
                         <a href="https://holynski.org/">
                             Aleksander Holynski
-                        </a><sup>2✱</sup>
+                        </a><sup>2*</sup>
                     </li>
                     <!-- </br>Google -->
                 </ul>
             </div>
             <div class="col-md-12 text-center">
-                <sup>1</sup>Columbia University, &nbsp <sup>2</sup>Google Research
+                <sup>1</sup>Columbia University, &nbsp <sup>2</sup>Google
             </div>
             <div class="col-md-12 text-center">
-                <sup>✱</sup> Denotes equal contribution
+                <sup>*</sup> Denotes equal contribution
             </div> </div>
 
 
@@ -224,7 +277,7 @@
                     Comparisons
                 </h3>
 
-                <div class="text-center">
+<!--                 <div class="text-center">
                     <label id="method_label">Baseline method:</label>
                     <select name="method" id="method_btn" onchange="selectCompVideo()">
                         <option value="zipnerf">Zip-NeRF</option>
@@ -248,7 +301,113 @@
                         <option value="re10k_00beb03ef95dc637">Re10K/bedroom, 3 views</option>
                         <option value="re10k_000c3ab189999a83">Re10K/living room, 3 views</option>
                     </select>
-                </div>
+                </div> -->
+
+<div class="text-center">
+    Method
+    <div class="pill-row" id="method-pills">
+        <span class="pill method-pill" data-value="zipnerf" onmouseover="selectCompVideo('zipnerf', getSceneValue(), this, activeScenePill)">Zip-NeRF</span>
+        <span class="pill method-pill" data-value="diffusionerf" onmouseover="selectCompVideo('diffusionerf', getSceneValue(), this, activeScenePill)">DiffusioNeRF</span>
+        <span class="pill method-pill" data-value="freenerf" onmouseover="selectCompVideo('freenerf', getSceneValue(), this, activeScenePill)">FreeNeRF</span>
+        <span class="pill method-pill" data-value="simplenerf" onmouseover="selectCompVideo('simplenerf', getSceneValue(), this, activeScenePill)">SimpleNeRF</span>
+        <span class="pill method-pill" data-value="zeronvs" onmouseover="selectCompVideo('zeronvs', getSceneValue(), this, activeScenePill)">ZeroNVS</span>
+    </div>
+    Scene
+    <div class="pill-row" id="scene-pills">
+        <span class="pill scene-pill" data-value="dtu_scan31" onmouseover="selectCompVideo(getMethodValue(), 'dtu_scan31', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/dtu_scan31_thumbnail.jpg" alt="DTU/scan31" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="dtu_scan45" onmouseover="selectCompVideo(getMethodValue(), 'dtu_scan45', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/dtu_scan45_thumbnail.jpg" alt="DTU/scan45" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="llff_fern" onmouseover="selectCompVideo(getMethodValue(), 'llff_fern', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/llff_fern_thumbnail.jpg" alt="LLFF/fern" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="llff_horns" onmouseover="selectCompVideo(getMethodValue(), 'llff_horns', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/llff_horns_thumbnail.jpg" alt="LLFF/horns" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="re10k_00beb03ef95dc637" onmouseover="selectCompVideo(getMethodValue(), 're10k_00beb03ef95dc637', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/re10k_00beb03ef95dc637_thumbnail.jpg" alt="Re10K/bedroom" width="64">
+        </span>
+    </div>
+    <div class="pill-row" id="scene-pills">
+        <span class="pill scene-pill" data-value="re10k_000c3ab189999a83" onmouseover="selectCompVideo(getMethodValue(), 're10k_000c3ab189999a83', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/re10k_000c3ab189999a83_thumbnail.jpg" alt="Re10K/living room" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="co3d_bench_185_19987_38634" onmouseover="selectCompVideo(getMethodValue(), 'co3d_bench_185_19987_38634', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/co3d_bench_185_19987_38634_thumbnail.jpg" alt="CO3D/bench" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onmouseover="selectCompVideo(getMethodValue(), 'co3d_plant_188_20319_36755', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/co3d_plant_188_20319_36755_thumbnail.jpg" alt="CO3D/plant" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="mipnerf360_bonsai" onmouseover="selectCompVideo(getMethodValue(), 'mipnerf360_bonsai', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/mipnerf360_bonsai_thumbnail.jpg" alt="mip-NeRF 360/bonsai" width="64">
+        </span>
+        <span class="pill scene-pill" data-value="mipnerf360_kitchen" onmouseover="selectCompVideo(getMethodValue(), 'mipnerf360_kitchen', activeMethodPill, this)">
+            <img class="thumbnail-img" src="thumbnails/mipnerf360_kitchen_thumbnail.jpg" alt="mip-NeRF 360/kitchen" width="64">
+        </span>
+    </div>
+</div>
+<input type="hidden" id="method_btn" value="zipnerf">
+<input type="hidden" id="scene_btn" value="mipnerf360_bonsai">
+
+
+
+<script>
+
+    // Function to get the current method value
+    function getMethodValue() {
+        return document.getElementById('method_btn').value;
+    }
+
+    // Function to get the current scene value
+    function getSceneValue() {
+        return document.getElementById('scene_btn').value;
+    }
+// Attach event listeners to all elements with the class 'pill' after a slight delay
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        const methodPills = document.querySelectorAll('.method-pill');
+        const scenePills = document.querySelectorAll('.scene-pill');
+
+        methodPills.forEach(methodPill => {
+            methodPill.addEventListener('mouseover', function () {
+                // Fetch the latest method value
+                const methodValue = methodPill.getAttribute('data-value');
+                // Update the hidden input field
+                document.getElementById('method_btn').value = methodValue;
+
+                // Fetch the latest scene value
+                const sceneValue = getSceneValue();
+                // Update the hidden input field
+                document.getElementById('scene_btn').value = sceneValue;
+
+                // Call the selectCompVideo function on mouseover with the selected values
+                selectCompVideo(methodValue, sceneValue, this, activeScenePill);
+            });
+        });
+
+        scenePills.forEach(scenePill => {
+            scenePill.addEventListener('mouseover', function () {
+                // Fetch the latest scene value
+                const sceneValue = scenePill.getAttribute('data-value');
+                // Update the hidden input field
+                document.getElementById('scene_btn').value = sceneValue;
+
+                // Fetch the latest method value
+                const methodValue = getMethodValue();
+                // Update the hidden input field
+                document.getElementById('method_btn').value = methodValue;
+
+                // Call the selectCompVideo function on mouseover with the selected values
+                selectCompVideo(methodValue, sceneValue, activeMethodPill, this);
+            });
+        });
+    }, 100); // Adjust the delay (in milliseconds) as needed
+});
+</script>
+
+
                 
                 <div class="text-center">
                     <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
