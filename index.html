@@ -47,14 +47,14 @@
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
 
-    <script>
+    <!-- <script>
         function selectCompVideo() {
           var scene = document.getElementById("scene_btn").value;
           var method = document.getElementById("method_btn").value;
           var video = document.getElementById("compVideo");
           video.src = "videos/" + scene + "_" + method + "_vs_ours.mp4";
         }
-    </script>
+    </script> -->
 
 <style>
     .thumbnail-img {
@@ -84,27 +84,34 @@
     var activeMethodPill = null;
     var activeScenePill = null;
 
-    function selectCompVideo(method, scene, methodPill, scenePill) {
+    function selectCompVideo(methodPill, scenePill, n_views) {
         // Your existing logic for video selection
         var video = document.getElementById("compVideo");
-        video.src = "videos/" + scene + "_" + method + "_vs_ours.mp4";
+        var videoSwitch = document.getElementById("compVideoSwitch");
+        var viewNum = document.getElementById("compVideoValue");
 
-        // Handling the active method pill
         if (activeMethodPill) {
             activeMethodPill.classList.remove("active-pill");
         }
-        if (methodPill) {
-            methodPill.classList.add("active-pill");
-            activeMethodPill = methodPill;
-        }
-
-        // Handling the active scene pill
         if (activeScenePill) {
             activeScenePill.classList.remove("active-pill");
         }
-        if (scenePill) {
-            scenePill.classList.add("active-pill");
-            activeScenePill = scenePill;
+        activeMethodPill = methodPill;
+        activeScenePill = scenePill;
+        methodPill.classList.add("active-pill");
+        scenePill.classList.add("active-pill");
+        method = methodPill.getAttribute("data-value");
+        pill = scenePill.getAttribute("data-value");
+
+        if (videoSwitch.checked) {
+            mode = 'depth'
+        } else {
+            mode = 'rgb'
+        }
+        video.src = "videos/comparison/" + pill + "_" + method + "_vs_ours_" + mode + ".mp4";
+
+        if (n_views) {
+            viewNum.innerHTML = n_views;
         }
     }
 </script>
@@ -231,34 +238,6 @@
         </div>
         <br>
 
-
-        <!-- <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Video
-                </h3>
-                <div class="text-center">
-                    <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://youtube.com/embed/xrrhynRzC8k" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-<!-- <br> -->
-        <!-- <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    360° Video Flythroughs
-                </h3>
-                <div class="text-center">
-                    <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://www.youtube.com/embed/videoseries?list=PLzPoYEE6Aw7Jzjek1uEIPnpcTDL3u8tb4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                        <iframe src="https://youtube.com/embed/jbE2ri8xEZo" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-<!-- <br> -->
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
@@ -277,104 +256,76 @@
                     Comparisons
                 </h3>
 
-<!--                 <div class="text-center">
-                    <label id="method_label">Baseline method:</label>
-                    <select name="method" id="method_btn" onchange="selectCompVideo()">
-                        <option value="zipnerf">Zip-NeRF</option>
-                        <option value="diffusionerf">DiffusioNeRF</option>
-                        <option value="freenerf">FreeNeRF</option>
-                        <option value="simplenerf">SimpleNeRF</option>
-                        <option value="zeronvs">ZeroNVS</option>
-                    </select>
-                    &emsp;
-
-                    <label id="scene_label">Scene:</label>
-                    <select name="scene" id="scene_btn" onchange="selectCompVideo()">
-                        <option value="mipnerf360_bonsai">mip-NeRF 360/bonsai, 9 views</option>
-                        <option value="mipnerf360_kitchen">mip-NeRF 360/kitchen, 9 views</option>
-                        <option value="co3d_bench_185_19987_38634">CO3D/bench, 6 views</option>
-                        <option value="co3d_plant_188_20319_36755">CO3D/plant, 6 views</option>
-                        <option value="dtu_scan31">DTU/scan31, 3 views</option>
-                        <option value="dtu_scan45">DTU/scan45, 3 views</option>
-                        <option value="llff_fern">LLFF/fern, 3 views</option>
-                        <option value="llff_horns">LLFF/horns, 3 views</option>
-                        <option value="re10k_00beb03ef95dc637">Re10K/bedroom, 3 views</option>
-                        <option value="re10k_000c3ab189999a83">Re10K/living room, 3 views</option>
-                    </select>
-                </div> -->
-
 <div class="text-center">
     <div class="pill-row" id="method-pills">
    <span> Compare to: </span>
-        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo('zipnerf', getSceneValue(), this, activeScenePill)">Zip-NeRF</span>
-        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo('diffusionerf', getSceneValue(), this, activeScenePill)">DiffusioNeRF</span>
-        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo('freenerf', getSceneValue(), this, activeScenePill)">FreeNeRF</span>
-        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo('simplenerf', getSceneValue(), this, activeScenePill)">SimpleNeRF</span>
-        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo('zeronvs', getSceneValue(), this, activeScenePill)">ZeroNVS</span>
+        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
+        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
+        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
+        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
+        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
     </div>
     <div class="pill-row" id="scene-pills">
-        <span class="pill scene-pill" data-value="dtu_scan31" onclick="selectCompVideo(getMethodValue(), 'dtu_scan31', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="dtu_scan31" onclick="selectCompVideo(activeMethodPill, this, 3)">
             <img class="thumbnail-img" src="thumbnails/dtu_scan31_thumbnail.jpg" alt="DTU/scan31" width="64">
         </span>
-        <span class="pill scene-pill" data-value="dtu_scan45" onclick="selectCompVideo(getMethodValue(), 'dtu_scan45', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="dtu_scan45" onclick="selectCompVideo(activeMethodPill, this, 3)">
             <img class="thumbnail-img" src="thumbnails/dtu_scan45_thumbnail.jpg" alt="DTU/scan45" width="64">
         </span>
-        <span class="pill scene-pill" data-value="llff_fern" onclick="selectCompVideo(getMethodValue(), 'llff_fern', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="llff_fern" onclick="selectCompVideo(activeMethodPill, this, 3)">
             <img class="thumbnail-img" src="thumbnails/llff_fern_thumbnail.jpg" alt="LLFF/fern" width="64">
         </span>
-        <span class="pill scene-pill" data-value="llff_horns" onclick="selectCompVideo(getMethodValue(), 'llff_horns', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="llff_horns" onclick="selectCompVideo(activeMethodPill, this, 3)">
             <img class="thumbnail-img" src="thumbnails/llff_horns_thumbnail.jpg" alt="LLFF/horns" width="64">
         </span>
-        <span class="pill scene-pill" data-value="re10k_00beb03ef95dc637" onclick="selectCompVideo(getMethodValue(), 're10k_00beb03ef95dc637', activeMethodPill, this)">
-            <img class="thumbnail-img" src="thumbnails/re10k_00beb03ef95dc637_thumbnail.jpg" alt="Re10K/bedroom" width="64">
+        <span class="pill scene-pill" data-value="re10k_00e8df74b6805da7" onclick="selectCompVideo(activeMethodPill, this, 3)">
+            <img class="thumbnail-img" src="thumbnails/re10k_00e8df74b6805da7_thumbnail.jpg" alt="Re10K/sofa" width="64">
         </span>
     </div>
     <div class="pill-row" id="scene-pills">
-        <span class="pill scene-pill" data-value="re10k_000c3ab189999a83" onclick="selectCompVideo(getMethodValue(), 're10k_000c3ab189999a83', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="re10k_000c3ab189999a83" onclick="selectCompVideo(activeMethodPill, this, 3)">
             <img class="thumbnail-img" src="thumbnails/re10k_000c3ab189999a83_thumbnail.jpg" alt="Re10K/living room" width="64">
         </span>
-        <span class="pill scene-pill" data-value="co3d_bench_185_19987_38634" onclick="selectCompVideo(getMethodValue(), 'co3d_bench_185_19987_38634', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="co3d_bench_185_19987_38634" onclick="selectCompVideo(activeMethodPill, this, 6)">
             <img class="thumbnail-img" src="thumbnails/co3d_bench_185_19987_38634_thumbnail.jpg" alt="CO3D/bench" width="64">
         </span>
-        <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onclick="selectCompVideo(getMethodValue(), 'co3d_plant_188_20319_36755', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onclick="selectCompVideo(activeMethodPill, this, 6)">
             <img class="thumbnail-img" src="thumbnails/co3d_plant_188_20319_36755_thumbnail.jpg" alt="CO3D/plant" width="64">
         </span>
-        <span class="pill scene-pill active-pill" data-value="mipnerf360_bonsai" onclick="selectCompVideo(getMethodValue(), 'mipnerf360_bonsai', activeMethodPill, this)">
+        <span class="pill scene-pill active-pill" data-value="mipnerf360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 9)">
             <img class="thumbnail-img" src="thumbnails/mipnerf360_bonsai_thumbnail.jpg" alt="mip-NeRF 360/bonsai" width="64">
         </span>
-        <span class="pill scene-pill" data-value="mipnerf360_kitchen" onclick="selectCompVideo(getMethodValue(), 'mipnerf360_kitchen', activeMethodPill, this)">
+        <span class="pill scene-pill" data-value="mipnerf360_kitchen" onclick="selectCompVideo(activeMethodPill, this, 9)">
             <img class="thumbnail-img" src="thumbnails/mipnerf360_kitchen_thumbnail.jpg" alt="mip-NeRF 360/kitchen" width="64">
         </span>
     </div>
 </div>
-<input type="hidden" id="method_btn" value="zipnerf">
-<input type="hidden" id="scene_btn" value="mipnerf360_bonsai">
-
-
 
 <script>
-
-    // Function to get the current method value
-    function getMethodValue() {
-        return document.getElementById('method_btn').value;
-    }
-
-    // Function to get the current scene value
-    function getSceneValue() {
-        return document.getElementById('scene_btn').value;
-    }
-// Attach event listeners to all elements with the class 'pill' after a slight delay
+    activeMethodPill = document.querySelector('.method-pill.active-pill');
+    activeScenePill = document.querySelector('.scene-pill.active-pill');
 </script>
-
-
                 
                 <div class="text-center">
                     <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
-                        <source src="videos/mipnerf360_bonsai_zipnerf_vs_ours.mp4" />
+                        <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
                     </video>
+                    <div class="switch-container-wrapper">
+                        <div class="switch-container">
+                            <span class="switch-label">RGB</span>
+                            <label class="switch">
+                                <input type="checkbox" id="compVideoSwitch" onclick="selectCompVideo(activeMethodPill, activeScenePill)">
+                                <div class="slider round"></div>
+                            </label>
+                            <span class="switch-label">Depth</span>
+                        </div>
+                    </div>
+                    
+                    <br>
                     <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs our ReconFusion (right).
+                        <br><span id="compVideoValue" style="color: red;">9</span> input views.
                     </p>
                 </div>
             </div>
@@ -384,13 +335,58 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Samples from diffusion model
+                    Ablation study
                 </h3>
-                <video id="v0" width="100%" autoplay loop muted>
-                <source src="img/#.m4v" type="video/mp4" />
-                </video>
+                
+                <table style="width:100%">
+                    <tr>
+                      <th></th>
+                      <th style="text-align: center;">\(\texttt{Pose}\)</th>
+                      <th style="text-align: center;">\(\texttt{w/o PT}\)</th>
+                      <th style="text-align: center;">\(\texttt{Ours}\)</th>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; writing-mode: vertical-rl; transform: rotate(-180deg);">Reconstructed NeRF</td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/z123_nerf.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/scratch_nerf.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/ours_nerf.mp4" />
+                        </video>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(-180deg);">Diffusion samples</td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/z123_samples.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/scratch_samples.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/ours_samples.mp4" />
+                        </video>
+                      </td>
+                    </tr>
+                </table>
+
                 <p class="text-justify">
-                    Compare ablations of our method. TBA. 
+                    Ablation of our diffusion model on 3-view reconstruction.
+                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS. &emsp;
+                    \(\texttt{w/o PT}\): trains the diffusion model from scratch without pretrained weights.
                 </p>
             </div>
         </div>
@@ -410,7 +406,7 @@
                 <script src="js/sparsity_chart.js"></script>
     
                 <div class="text-center">
-                    <video class="video" width=100% id="sparsityVideo" loop playsinline autoplay muted onplay="playOnCanvas(this, 250)">
+                    <video class="video" width=100% id="sparsityVideo" loop playsinline autoplay muted onplay="playOnCanvas(this, 240)">
                         <source src="videos/sparsity/kitchenlego_3.mp4" type="video/mp4" />
                     </video>
                     <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas>
