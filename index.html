@@ -306,22 +306,20 @@
     activeScenePill = document.querySelector('.scene-pill.active-pill');
 </script>
                 
+                <div class="switch-container-wrapper">
+                    <div class="switch-container">
+                        <span class="switch-label">RGB</span>
+                        <label class="switch">
+                            <input type="checkbox" id="compVideoSwitch" onclick="selectCompVideo(activeMethodPill, activeScenePill)">
+                            <div class="slider round"></div>
+                        </label>
+                        <span class="switch-label">Depth</span>
+                    </div>
+                </div>
                 <div class="text-center">
                     <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
                         <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
                     </video>
-                    <div class="switch-container-wrapper">
-                        <div class="switch-container">
-                            <span class="switch-label">RGB</span>
-                            <label class="switch">
-                                <input type="checkbox" id="compVideoSwitch" onclick="selectCompVideo(activeMethodPill, activeScenePill)">
-                                <div class="slider round"></div>
-                            </label>
-                            <span class="switch-label">Depth</span>
-                        </div>
-                    </div>
-                    
-                    <br>
                     <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs our ReconFusion (right).

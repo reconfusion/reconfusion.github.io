@@ -53,10 +53,10 @@ function playVids(videoId, targetHeight=420) {
             var arrowWidth = 0.007 * vidHeight;
             var currX = vidWidth * position;
 
-            // Draw circle
-            mergeContext.arc(currX, arrowPosY, arrowLength*0.7, 0, Math.PI * 2, false);
-            mergeContext.fillStyle = "#FFD79340";
-            mergeContext.fill()
+            // // Draw circle
+            // mergeContext.arc(currX, arrowPosY, arrowLength*0.7, 0, Math.PI * 2, false);
+            // mergeContext.fillStyle = "#FFD79340";
+            // mergeContext.fill()
             //mergeContext.strokeStyle = "#444444";
             //mergeContext.stroke()
             
@@ -99,6 +99,10 @@ function playVids(videoId, targetHeight=420) {
             mergeContext.fillStyle = "#AAAAAA";
             mergeContext.fill();
 
+            // Draw circle
+            mergeContext.arc(currX, arrowPosY, arrowLength*0.7, 0, Math.PI * 2, false);
+            mergeContext.fillStyle = "#FFD79340";
+            mergeContext.fill()
             
             
         }
