@@ -197,7 +197,7 @@ span.highlight {
 }
 
 input:checked + .slider {
-  background-color: #2ab934;
+  background-color: #b2b2b2;
 }
 
 input:focus + .slider {

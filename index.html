@@ -219,10 +219,43 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <video id="v0" width="100%" autoplay loop muted controls>
-                  <source src="img/#.mp4" type="video/mp4" />
+                <!-- <video id="teaser-video-ours" width="100%" autoplay loop muted>
+                  <source src="videos/teaser/grid_wipe.mp4" type="video/mp4" />
+                </video> -->
+
+                <video id="teaser-video-ours" width="100%" autoplay loop muted>
+                  <source src="videos/teaser/grid_ours.mp4" type="video/mp4" />
                 </video>
-						</div>
+                <video id="teaser-video-zipenrf" width="100%" autoplay loop muted hidden>
+                  <source src="videos/teaser/grid_zipnerf.mp4" type="video/mp4" />
+                </video>
+
+                <div class="switch-container-wrapper">
+                    <div class="switch-container">
+                        <span class="switch-label">Ours</span>
+                        <label class="switch">
+                            <input type="checkbox" id="teaserVideoSwitch" onclick="selectTeaserVideo()">
+                            <div class="slider round"></div>
+                        </label>
+                        <span class="switch-label">Zip-NeRF</span>
+                    </div>
+                </div>
+                <script>
+                    function selectTeaserVideo() {
+                      var video_ours = document.getElementById("teaser-video-ours");
+                      var video_zipnerf = document.getElementById("teaser-video-zipenrf");
+                      var videoSwitch = document.getElementById("teaserVideoSwitch");
+                      if (videoSwitch.checked) {
+                        video_zipnerf.hidden = false;
+                        video_ours.hidden = true;
+                      } else {
+                        video_zipnerf.hidden = true;
+                        video_ours.hidden = false;
+                      }
+                    }
+                </script>
+
+			</div>
         </div>
 
 
@@ -320,7 +353,7 @@
                     <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
                         <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
                     </video>
-                    <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
+                    <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs our ReconFusion (right).
                         <br><span id="compVideoValue" style="color: red;">9</span> input views.
