@@ -47,15 +47,6 @@
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
 
-    <!-- <script>
-        function selectCompVideo() {
-          var scene = document.getElementById("scene_btn").value;
-          var method = document.getElementById("method_btn").value;
-          var video = document.getElementById("compVideo");
-          video.src = "videos/" + scene + "_" + method + "_vs_ours.mp4";
-        }
-    </script> -->
-
 <style>
     .thumbnail-img {
         max-width: 100%;
@@ -83,10 +74,12 @@
     // JavaScript to handle mouseover and mouseout events
     var activeMethodPill = null;
     var activeScenePill = null;
+    var activeModePill = null;
+    var activeVidID = 0;
 
-    function selectCompVideo(methodPill, scenePill, n_views) {
+    function selectCompVideo(methodPill, scenePill, n_views, modePill) {
         // Your existing logic for video selection
-        var video = document.getElementById("compVideo");
+        // var video = document.getElementById("compVideo");
         var videoSwitch = document.getElementById("compVideoSwitch");
         var viewNum = document.getElementById("compVideoValue");
 
@@ -96,19 +89,31 @@
         if (activeScenePill) {
             activeScenePill.classList.remove("active-pill");
         }
+        if (modePill) {
+            activeModePill.classList.remove("active-pill");
+            modePill.classList.add("active-pill");
+            activeModePill = modePill;
+        }
         activeMethodPill = methodPill;
         activeScenePill = scenePill;
         methodPill.classList.add("active-pill");
         scenePill.classList.add("active-pill");
         method = methodPill.getAttribute("data-value");
         pill = scenePill.getAttribute("data-value");
+        mode = activeModePill.getAttribute("data-value");
 
-        if (videoSwitch.checked) {
-            mode = 'depth'
-        } else {
-            mode = 'rgb'
-        }
-        video.src = "videos/comparison/" + pill + "_" + method + "_vs_ours_" + mode + ".mp4";
+        // if (videoSwitch.checked) {
+        //     mode = 'depth'
+        // } else {
+        //     mode = 'rgb'
+        // }
+        
+        // swap video to avoid flickering
+        activeVidID = 1 - activeVidID;
+        var video_active = document.getElementById("compVideo" + activeVidID);
+        var video_hidden = document.getElementById("compVideo" + (1 - activeVidID));
+        video_active.src = "videos/comparison/" + pill + "_" + method + "_vs_ours_" + mode + ".mp4";
+        video_active.load();
 
         if (n_views) {
             viewNum.innerHTML = n_views;
@@ -219,10 +224,10 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <!-- <video id="teaser-video-ours" width="100%" autoplay loop muted>
+                <video id="teaser-video-ours" width="100%" autoplay loop muted>
                   <source src="videos/teaser/grid_wipe.mp4" type="video/mp4" />
-                </video> -->
-
+                </video>
+<!-- 
                 <video id="teaser-video-ours" width="100%" autoplay loop muted>
                   <source src="videos/teaser/grid_ours.mp4" type="video/mp4" />
                 </video>
@@ -254,7 +259,7 @@
                       }
                     }
                 </script>
-
+ -->
 			</div>
         </div>
 
@@ -332,14 +337,23 @@
             <img class="thumbnail-img" src="thumbnails/mipnerf360_kitchen_thumbnail.jpg" alt="mip-NeRF 360/kitchen" width="64">
         </span>
     </div>
+    <div class="pill-row" id="mode-pills">
+        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, 3, this)">
+            RGB
+        </span>
+        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, 6, this)">
+            Depth
+        </span>
+    </div>
 </div>
 
 <script>
     activeMethodPill = document.querySelector('.method-pill.active-pill');
     activeScenePill = document.querySelector('.scene-pill.active-pill');
+    activeModePill = document.querySelector('.mode-pill.active-pill');
 </script>
                 
-                <div class="switch-container-wrapper">
+                <!-- <div class="switch-container-wrapper">
                     <div class="switch-container">
                         <span class="switch-label">RGB</span>
                         <label class="switch">
@@ -348,82 +362,36 @@
                         </label>
                         <span class="switch-label">Depth</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="text-center">
-                    <video class="video" width=100% id="compVideo" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
+                    <video class="video" width=100% id="compVideo0" loop playsinline autoplay muted>
                         <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
+                    </video>
+                    <video class="video" width=100% id="compVideo1" loop playsinline autoplay muted hidden>
+                        <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
                     </video>
                     <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs our ReconFusion (right).
                         <br><span id="compVideoValue" style="color: red;">9</span> input views.
                     </p>
+                    <script>
+                        video0 = document.getElementById("compVideo0");
+                        video1 = document.getElementById("compVideo1");
+                        video0.addEventListener('loadedmetadata', function() {
+                            if (activeVidID == 0)
+                                video0.play();
+                                video0.hidden = false;
+                                video1.hidden = true;
+                        });
+                        video1.addEventListener('loadedmetadata', function() {
+                            if (activeVidID == 1)
+                                video1.play();
+                                video0.hidden = true;
+                                video1.hidden = false;
+                        });
+                    </script>
                 </div>
-            </div>
-        </div>
-        <br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Ablation study
-                </h3>
-                
-                <table style="width:100%">
-                    <tr>
-                      <th></th>
-                      <th style="text-align: center;">\(\texttt{Pose}\)</th>
-                      <th style="text-align: center;">\(\texttt{w/o PT}\)</th>
-                      <th style="text-align: center;">\(\texttt{Ours}\)</th>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center; writing-mode: vertical-rl; transform: rotate(-180deg);">Reconstructed NeRF</td>
-                      <td rowspan="2" colspan="3">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 400px;">
-                            <source src="videos/ablation/ablation_grid.mp4" />
-                        </video>
-                      </td>
-                      <!-- <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/z123_nerf.mp4" />
-                        </video>
-                      </td>
-                      <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/scratch_nerf.mp4" />
-                        </video>
-                      </td>
-                      <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/ours_nerf.mp4" />
-                        </video>
-                      </td> -->
-                    </tr>
-                    <tr>
-                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(-180deg);">Diffusion samples</td>
-                      <!-- <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/z123_samples.mp4" />
-                        </video>
-                      </td>
-                      <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/scratch_samples.mp4" />
-                        </video>
-                      </td>
-                      <td style="text-align: center;">
-                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
-                            <source src="videos/ablation/ours_samples.mp4" />
-                        </video>
-                      </td> -->
-                    </tr>
-                </table>
-
-                <p class="text-justify">
-                    Ablation of our diffusion model on 3-view reconstruction.
-                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS. &emsp;
-                    \(\texttt{w/o PT}\): trains the diffusion model from scratch without pretrained weights.
-                </p>
             </div>
         </div>
         <br>
@@ -476,6 +444,71 @@
                 </p>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Ablation study
+                </h3>
+                
+                <table style="width:100%">
+                    <tr>
+                      <th></th>
+                      <th style="text-align: center;width: 250px;">\(\texttt{Pose}\)</th>
+                      <th style="text-align: center;width: 250px;">\(\texttt{w/o PT}\)</th>
+                      <th style="text-align: center;width: 250px;">\(\texttt{Ours}\)</th>
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">Reconstructed NeRF</td>
+                      <td rowspan="2" colspan="3">
+                        <video class="video" width=100% loop playsinline autoplay muted>
+                            <source src="videos/ablation/ablation_grid.mp4" />
+                        </video>
+                      </td>
+                      <!-- <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/z123_nerf.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/scratch_nerf.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/ours_nerf.mp4" />
+                        </video>
+                      </td> -->
+                    </tr>
+                    <tr>
+                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">Diffusion samples</td>
+                      <!-- <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/z123_samples.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/scratch_samples.mp4" />
+                        </video>
+                      </td>
+                      <td style="text-align: center;">
+                        <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
+                            <source src="videos/ablation/ours_samples.mp4" />
+                        </video>
+                      </td> -->
+                    </tr>
+                </table>
+
+                <p class="text-justify">
+                    Ablation of our diffusion model on 3-view reconstruction.
+                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS. &emsp;
+                    \(\texttt{w/o PT}\): trains the diffusion model from scratch without pretrained weights.
+                </p>
+            </div>
+        </div>
+        <br>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
