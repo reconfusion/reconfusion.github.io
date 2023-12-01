@@ -226,7 +226,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <video id="teaser-video-ours" width="100%" autoplay loop muted>
+                <video id="teaser-video-ours" width="100%" autoplay loop muted controls>
                   <source src="videos/teaser/grid_wipe.mp4" type="video/mp4" />
                 </video>
 <!-- 
@@ -283,7 +283,7 @@
                 <h3>
                     ReconFusion
                 </h3>
-                <image src="img/overview_combined.png" width=100%></image>
+                <image src="img/overview_combined.png" width=90% style="display: block; margin: auto;"></image>
                 <p class="text-justify">
                     (a) We optimize a NeRF to minimize a reconstruction loss \(\mathcal{L}_\mathrm{recon}\) between renderings and a few input images, as well as a sample loss \(\mathcal{L}_\mathrm{sample}\) between a rendering from a random pose and an image predicted by a diffusion model for that pose. (b) To generate the sample image, we use a PixelNeRF-style model to fuse information from the input images and to render a predicted feature map corresponding to the sample view camera pose. (c) This feature map is concatenated with the noisy latent (computed from the current NeRF rendering at that pose) and is provided to a diffusion model, which additionally uses CLIP embeddings of the input images via cross-attention. The resulting decoded output sample is used to enforce an image-space loss on the corresponding NeRF rendering (\(\mathcal{L}_\mathrm{sample}\)).
                 </p>
@@ -611,9 +611,9 @@
                     </tr>
                 </table>
 
-                <p class="text-justify">
+                <p class="text-justify" style="width: 85%; margin: auto;">
                     Ablation of our diffusion model on 3-view reconstruction.
-                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS. &emsp;
+                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS.
                     \(\texttt{w/o PT}\): trains the diffusion model from scratch without pretrained weights.
                 </p>
             </div>
