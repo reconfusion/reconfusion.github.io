@@ -249,3 +249,17 @@ input:checked + .slider:after
   margin-right: 5px; /* Adjust the margin as needed */
   margin-left: 5px; /* Adjust the margin as needed */
 }
+
+.video-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%; /* Adjust the top position as needed */
+  left: 50%; /* Adjust the left position as needed */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  color: black;
+  font-size: 16px;
+}

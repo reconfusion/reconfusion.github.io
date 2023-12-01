@@ -65,7 +65,7 @@
     }
 
     .active-pill {
-        background-color: #e0e0e0; /* Adjust the color as needed */
+        background-color: #b4b4b4; /* Adjust the color as needed */
     }
 </style>
 
@@ -76,10 +76,12 @@
     var activeScenePill = null;
     var activeModePill = null;
     var activeVidID = 0;
+    var select = false;
 
     function selectCompVideo(methodPill, scenePill, n_views, modePill) {
         // Your existing logic for video selection
         // var video = document.getElementById("compVideo");
+        select = true;
         var videoSwitch = document.getElementById("compVideoSwitch");
         var viewNum = document.getElementById("compVideoValue");
 
@@ -124,7 +126,7 @@
 </head>
 
 <body>
-    <div class="container" id="main">
+    <div class="container-lg" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
                 <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
@@ -303,48 +305,24 @@
         <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
         <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
     </div>
-    <div class="pill-row" id="scene-pills">
-        <span class="pill scene-pill" data-value="dtu_scan31" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/dtu_scan31_thumbnail.jpg" alt="DTU/scan31" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="dtu_scan45" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/dtu_scan45_thumbnail.jpg" alt="DTU/scan45" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="llff_fern" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/llff_fern_thumbnail.jpg" alt="LLFF/fern" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="llff_horns" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/llff_horns_thumbnail.jpg" alt="LLFF/horns" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="re10k_00e8df74b6805da7" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/re10k_00e8df74b6805da7_thumbnail.jpg" alt="Re10K/sofa" width="64">
-        </span>
-    </div>
-    <div class="pill-row" id="scene-pills">
-        <span class="pill scene-pill" data-value="re10k_000c3ab189999a83" onclick="selectCompVideo(activeMethodPill, this, 3)">
-            <img class="thumbnail-img" src="thumbnails/re10k_000c3ab189999a83_thumbnail.jpg" alt="Re10K/living room" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="co3d_bench_185_19987_38634" onclick="selectCompVideo(activeMethodPill, this, 6)">
-            <img class="thumbnail-img" src="thumbnails/co3d_bench_185_19987_38634_thumbnail.jpg" alt="CO3D/bench" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onclick="selectCompVideo(activeMethodPill, this, 6)">
-            <img class="thumbnail-img" src="thumbnails/co3d_plant_188_20319_36755_thumbnail.jpg" alt="CO3D/plant" width="64">
-        </span>
-        <span class="pill scene-pill active-pill" data-value="mipnerf360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 9)">
-            <img class="thumbnail-img" src="thumbnails/mipnerf360_bonsai_thumbnail.jpg" alt="mip-NeRF 360/bonsai" width="64">
-        </span>
-        <span class="pill scene-pill" data-value="mipnerf360_kitchen" onclick="selectCompVideo(activeMethodPill, this, 9)">
-            <img class="thumbnail-img" src="thumbnails/mipnerf360_kitchen_thumbnail.jpg" alt="mip-NeRF 360/kitchen" width="64">
-        </span>
-    </div>
-    <div class="pill-row" id="mode-pills">
-        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, 3, this)">
+    <!-- <div class="pill-row" id="mode-pills">
+        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
             RGB
         </span>
-        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, 6, this)">
+        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
             Depth
         </span>
+    </div> -->
     </div>
+    </div>
+</div>
+
+<script>
+    activeMethodPill = document.querySelector('.method-pill.active-pill');
+    activeScenePill = document.querySelector('.scene-pill.active-pill');
+    activeModePill = document.querySelector('.mode-pill.active-pill');
+</script>
+</div>
 </div>
 
 <script>
@@ -364,32 +342,100 @@
                     </div>
                 </div> -->
                 <div class="text-center">
-                    <video class="video" width=100% id="compVideo0" loop playsinline autoplay muted>
+                    <div class="video-container">
+                        <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted controls>
+                            <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
+                        </video>
+                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted controls hidden>
+                            <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
+                        </video>
+
+
+                        <div class="overlay" style="top: 0%; left: 48.5%;">
+                            <span id="compVideoValue">9</span> views
+                        </div>
+
+                        <div class="overlay"  style="top: 88%; left: 47.5%; padding: 2px; color: black;" id="mode-pills">
+                            <span class="pill mode-pill active-pill" style="padding: 0px; margin: 0px;" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                                RGB
+                            </span>
+                            <span class="pill mode-pill" style="padding: 0px; margin: 0px;" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                                Depth
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- <video class="video" height="280px" id="compVideo0" loop playsinline autoplay muted controls>
                         <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
                     </video>
-                    <video class="video" width=100% id="compVideo1" loop playsinline autoplay muted hidden>
+                    <video class="video" height="280px" id="compVideo1" loop playsinline autoplay muted controls hidden>
                         <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
-                    </video>
+                    </video> -->
                     <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs our ReconFusion (right).
-                        <br><span id="compVideoValue" style="color: red;">9</span> input views.
+                        <!-- <br><span id="compVideoValue" style="color: red;">9</span> input views. -->
                     </p>
                     <script>
                         video0 = document.getElementById("compVideo0");
                         video1 = document.getElementById("compVideo1");
                         video0.addEventListener('loadedmetadata', function() {
-                            if (activeVidID == 0)
+                            if (activeVidID == 0 && select){
                                 video0.play();
+                                // print video size
+                                console.log(video0.videoWidth, video0.videoHeight);
                                 video0.hidden = false;
                                 video1.hidden = true;
+                            }
                         });
                         video1.addEventListener('loadedmetadata', function() {
-                            if (activeVidID == 1)
+                            if (activeVidID == 1 && select){
                                 video1.play();
+                                // print video size
+                                console.log(video1.videoWidth, video1.videoHeight);
                                 video0.hidden = true;
                                 video1.hidden = false;
+                            }
                         });
+                    </script>
+
+                    <div class="pill-row" id="scene-pills">
+                        <span class="pill scene-pill" data-value="dtu_scan31" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/dtu_scan31_thumbnail.jpg" alt="DTU/scan31" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="dtu_scan45" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/dtu_scan45_thumbnail.jpg" alt="DTU/scan45" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="llff_fern" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/llff_fern_thumbnail.jpg" alt="LLFF/fern" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="llff_horns" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/llff_horns_thumbnail.jpg" alt="LLFF/horns" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="re10k_00e8df74b6805da7" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/re10k_00e8df74b6805da7_thumbnail.jpg" alt="Re10K/sofa" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="re10k_000c3ab189999a83" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/re10k_000c3ab189999a83_thumbnail.jpg" alt="Re10K/living room" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="co3d_bench_185_19987_38634" onclick="selectCompVideo(activeMethodPill, this, 6)">
+                            <img class="thumbnail-img" src="thumbnails/co3d_bench_185_19987_38634_thumbnail.jpg" alt="CO3D/bench" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onclick="selectCompVideo(activeMethodPill, this, 6)">
+                            <img class="thumbnail-img" src="thumbnails/co3d_plant_188_20319_36755_thumbnail.jpg" alt="CO3D/plant" width="64">
+                        </span>
+                        <span class="pill scene-pill active-pill" data-value="mipnerf360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 9)">
+                            <img class="thumbnail-img" src="thumbnails/mipnerf360_bonsai_thumbnail.jpg" alt="mip-NeRF 360/bonsai" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="mipnerf360_kitchen" onclick="selectCompVideo(activeMethodPill, this, 9)">
+                            <img class="thumbnail-img" src="thumbnails/mipnerf360_kitchen_thumbnail.jpg" alt="mip-NeRF 360/kitchen" width="64">
+                        </span>
+                    </div>
+
+                    <script>
+                        activeMethodPill = document.querySelector('.method-pill.active-pill');
+                        activeScenePill = document.querySelector('.scene-pill.active-pill');
+                        activeModePill = document.querySelector('.mode-pill.active-pill');
                     </script>
                 </div>
             </div>
@@ -401,22 +447,86 @@
                 <h3>
                     Different amount of sparsity
                 </h3>
-                <p class="text-justify" style="color:red">
+                <!-- <p class="text-justify" style="color:red">
                     Hover over the plot to show rendered video under different number of views.
-                </p>
+                </p> -->
                 
                 <!-- top down layout -->
                 <canvas id="sparsityChart" style="max-height: 300px; max-width: 500px; margin: auto;"></canvas>
                 <script src="js/sparsity_chart.js"></script>
+                <br>
     
                 <div class="text-center">
-                    <video class="video" width=100% id="sparsityVideo" loop playsinline autoplay muted onplay="playOnCanvas(this, 240)">
+                    <video class="video" width="100%" id="sparsityVideo0" loop playsinline autoplay muted controls>
                         <source src="videos/sparsity/kitchenlego_3.mp4" type="video/mp4" />
                     </video>
-                    <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas>
-                    <div class="text-center">
-                        Rendered video under <span id="sparsityValue" style="color: red;">3</span> views
+                    <video class="video" width="100%" id="sparsityVideo1" loop playsinline autoplay muted controls hidden>
+                        <source src="videos/sparsity/kitchenlego_6.mp4" type="video/mp4" />
+                    </video>
+                    <!-- <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas> -->
+                    <div class="slider-container" style="padding-left: 12%; padding-right: 11%;">
+                        <input type="range" class="styled-slider" id="sparsitySlider" min="0" max="6" step="1" value="0" list="slider-labels">
+                        <datalist id="slider-labels">
+                            <option value="0">3</option>
+                            <option value="1">6</option>
+                            <option value="2">9</option>
+                            <option value="3">18</option>
+                            <option value="4">27</option>
+                            <option value="5">54</option>
+                            <option value="6">81</option>
+                        </datalist>
                     </div>
+                    <table style="text-align: left; padding-left: 0px; padding-right: 10%; width: 100%;">
+                        <tr>
+                            <th width="10%"># views</th>
+                            <td width="10%">3</td>
+                            <td width="10%">6</td>
+                            <td width="10%">9</td>
+                            <td width="10%">18</td>
+                            <td width="10%">27</td>
+                            <td width="10%">54</td>
+                            <td width="10%">81</td>
+                        </tr>
+                    </table>
+                    <script>
+                        var activeSparistyVideoID = 0;
+                        var initSparsity = true;
+
+                        sp_video0 = document.getElementById("sparsityVideo0");
+                        sp_video1 = document.getElementById("sparsityVideo1");
+                        sp_video0.addEventListener('loadedmetadata', function() {
+                            if (activeSparistyVideoID == 0 && !initSparsity){
+                                sp_video0.play();
+                                sp_video0.hidden = false;
+                                sp_video1.hidden = true;
+                            }
+                        });
+                        sp_video1.addEventListener('loadedmetadata', function() {
+                            if (activeSparistyVideoID == 1 && !initSparsity){
+                                sp_video1.play();
+                                sp_video0.hidden = true;
+                                sp_video1.hidden = false;
+                            }
+                        });
+
+                        // Add an event listener for the slider's input change
+                        const slider = document.getElementById('sparsitySlider');
+                        const array = [3, 6, 9, 18, 27, 54, 81];
+                        slider.addEventListener('input', () => {
+                            const sliderValue = slider.value;
+                            const n_views = array[sliderValue];
+                            // Update the video source
+                            initSparsity = false;
+                            activeSparistyVideoID = 1 - activeSparistyVideoID;
+                            var video_active = document.getElementById("sparsityVideo" + activeSparistyVideoID);
+                            video_active.src = "videos/sparsity/kitchenlego_" + n_views + ".mp4";
+                            video_active.load();
+                            video_active.play();
+                        });
+                    </script>
+                    <!-- <div class="text-center">
+                        Rendered video under <span id="sparsityValue" style="color: red;">3</span> views
+                    </div> -->
                 </div>
                 
                 <!-- left right layout -->
@@ -451,9 +561,9 @@
                     Ablation study
                 </h3>
                 
-                <table style="width:100%">
+                <table style="margin-left: auto; margin-right: auto; width: 90%;">
                     <tr>
-                      <th></th>
+                      <th style="width: 10px;"></th>
                       <th style="text-align: center;width: 250px;">\(\texttt{Pose}\)</th>
                       <th style="text-align: center;width: 250px;">\(\texttt{w/o PT}\)</th>
                       <th style="text-align: center;width: 250px;">\(\texttt{Ours}\)</th>
@@ -461,7 +571,7 @@
                     <tr>
                       <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">Reconstructed NeRF</td>
                       <td rowspan="2" colspan="3">
-                        <video class="video" width=100% loop playsinline autoplay muted>
+                        <video class="video" width=100% loop playsinline autoplay muted controls>
                             <source src="videos/ablation/ablation_grid.mp4" />
                         </video>
                       </td>

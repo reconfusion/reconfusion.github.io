@@ -55,13 +55,13 @@ new Chart("sparsityChart", {
                     
                     // Call your custom function with the values
                     // customHoverFunction(xLabel);
-                    if (lastHoveredxLabel != xLabel){
-                        var video = document.getElementById("sparsityVideo");
-                        video.src = "videos/sparsity/kitchenlego_" + xLabel + ".mp4";
-                        lastHoveredxLabel = xLabel;
-                        var video_label = document.getElementById("sparsityValue");
-                        video_label.innerHTML = xLabel;
-                    }
+                    // if (lastHoveredxLabel != xLabel){
+                    //     var video = document.getElementById("sparsityVideo");
+                    //     video.src = "videos/sparsity/kitchenlego_" + xLabel + ".mp4";
+                    //     lastHoveredxLabel = xLabel;
+                    //     var video_label = document.getElementById("sparsityValue");
+                    //     video_label.innerHTML = xLabel;
+                    // }
                     
                     // Return the tooltip label text
                     return datasetLabel + ': ' + value;
