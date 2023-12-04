@@ -126,7 +126,8 @@
 </head>
 
 <body>
-    <div class="container-lg" id="main">
+    <div class="container-lg" style="max-width: 1500px; margin: auto;" id="main">
+    <!-- <div class="container" id="main"> -->
         <div class="row">
             <h2 class="col-md-12 text-center">
                 <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
@@ -297,40 +298,32 @@
                     Comparisons
                 </h3>
 
-<div class="text-center">
-    <div class="pill-row" id="method-pills">
-   <span> Compare to: </span>
-        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
-        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
-        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
-        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
-        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
-    </div>
-    <!-- <div class="pill-row" id="mode-pills">
-        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-            RGB
-        </span>
-        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-            Depth
-        </span>
-    </div> -->
-    </div>
-    </div>
-</div>
+                <div class="text-center">
+                    <div class="pill-row" id="method-pills">
+                <span> Compare to: </span>
+                        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
+                        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
+                        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
+                        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
+                        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
+                    </div>
+                    <!-- <div class="pill-row" id="mode-pills">
+                        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                            RGB
+                        </span>
+                        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                            Depth
+                        </span>
+                    </div> -->
+                </div>
+                <!-- </div>
+                </div> -->
 
-<script>
-    activeMethodPill = document.querySelector('.method-pill.active-pill');
-    activeScenePill = document.querySelector('.scene-pill.active-pill');
-    activeModePill = document.querySelector('.mode-pill.active-pill');
-</script>
-</div>
-</div>
-
-<script>
-    activeMethodPill = document.querySelector('.method-pill.active-pill');
-    activeScenePill = document.querySelector('.scene-pill.active-pill');
-    activeModePill = document.querySelector('.mode-pill.active-pill');
-</script>
+                <script>
+                    activeMethodPill = document.querySelector('.method-pill.active-pill');
+                    activeScenePill = document.querySelector('.scene-pill.active-pill');
+                    activeModePill = document.querySelector('.mode-pill.active-pill');
+                </script>
                 
                 <!-- <div class="switch-container-wrapper">
                     <div class="switch-container">
@@ -352,11 +345,11 @@
                         </video>
 
 
-                        <div class="overlay" style="top: 0%; left: 48.5%;">
+                        <div class="overlay" style="top: 0%; left: 47.5%;">
                             <span id="compVideoValue">9</span> views
                         </div>
 
-                        <div class="overlay"  style="top: 88%; left: 47.5%; padding: 2px; color: black;" id="mode-pills">
+                        <div class="overlay"  style="top: 88%; left: 46.5%; padding: 2px; color: black;" id="mode-pills">
                             <span class="pill mode-pill active-pill" style="padding: 0px; margin: 0px;" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
                                 RGB
                             </span>
