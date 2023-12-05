@@ -377,7 +377,7 @@
                     </video> -->
                     <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
                     <p class="text-justify" style="text-align: center;">
-                        Baseline method (left) vs ReconFusion (right).
+                        Baseline method (left) vs ReconFusion (right). Try selecting different methods and scenes!
                         <!-- <br><span id="compVideoValue" style="color: red;">9</span> input views. -->
                     </p>
                     <script>
@@ -516,7 +516,7 @@
                 </table> -->
 
                 <p class="text-justify">
-                    Our learned diffusion prior improves performance over the Zip-NeRF baseline with as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset.
+                    Our diffusion prior improves performance over the Zip-NeRF baseline from a few (3) to many (81) input views.
                 </p>
             </div>
         </div>
@@ -578,7 +578,7 @@
                 </table>
 
                 <p class="text-justify" style="width: 85%; margin: auto;">
-                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model samples that are not multiview consistent (bottom). 
+                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model whose independent image samples are not multiview consistent (bottom) throught a multistep diffusion loss function.
                 </p>
             </div>
         </div>
