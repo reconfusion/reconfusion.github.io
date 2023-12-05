@@ -253,6 +253,7 @@ input:checked + .slider:after
 .video-container {
   position: relative;
   max-width: 100%;
+  margin: 0.5em;
 }
 
 .overlay {
@@ -263,3 +264,43 @@ input:checked + .slider:after
   color: black;
   font-size: 16px;
 }
+
+.thumbnail-img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  /* IE8 */
+}
+
+.pill {
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.active-pill {
+  /* background-color: #b4b4b4; */
+  /* Adjust the color as needed */
+  font-weight: bold;
+}
+
+.nav-pills {
+  cursor: pointer;
+}
+
+.center-pills {
+  display: flex;
+  justify-content: center;
+}
+
+.scene-pills > .active {
+  background: #1772d0;
+}
+
+/* .mode-pills > .active {
+  background: #1772d0;
+} */

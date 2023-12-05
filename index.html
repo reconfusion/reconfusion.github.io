@@ -33,8 +33,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="css/app.css">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
@@ -46,82 +44,6 @@
 
     <script src="js/app.js"></script>
     <script src="js/synced_video_selector.js"></script>
-
-<style>
-    .thumbnail-img {
-        max-width: 100%;
-        height: auto;
-        width: auto\9; /* IE8 */
-    }
-
-    .pill {
-        cursor: pointer;
-        padding: 5px;
-        margin: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        display: inline-block;
-        transition: background-color 0.3s;
-    }
-
-    .active-pill {
-        background-color: #b4b4b4; /* Adjust the color as needed */
-    }
-</style>
-
-
-<script>
-    // JavaScript to handle mouseover and mouseout events
-    var activeMethodPill = null;
-    var activeScenePill = null;
-    var activeModePill = null;
-    var activeVidID = 0;
-    var select = false;
-
-    function selectCompVideo(methodPill, scenePill, n_views, modePill) {
-        // Your existing logic for video selection
-        // var video = document.getElementById("compVideo");
-        select = true;
-        var videoSwitch = document.getElementById("compVideoSwitch");
-        var viewNum = document.getElementById("compVideoValue");
-
-        if (activeMethodPill) {
-            activeMethodPill.classList.remove("active-pill");
-        }
-        if (activeScenePill) {
-            activeScenePill.classList.remove("active-pill");
-        }
-        if (modePill) {
-            activeModePill.classList.remove("active-pill");
-            modePill.classList.add("active-pill");
-            activeModePill = modePill;
-        }
-        activeMethodPill = methodPill;
-        activeScenePill = scenePill;
-        methodPill.classList.add("active-pill");
-        scenePill.classList.add("active-pill");
-        method = methodPill.getAttribute("data-value");
-        pill = scenePill.getAttribute("data-value");
-        mode = activeModePill.getAttribute("data-value");
-
-        // if (videoSwitch.checked) {
-        //     mode = 'depth'
-        // } else {
-        //     mode = 'rgb'
-        // }
-        
-        // swap video to avoid flickering
-        activeVidID = 1 - activeVidID;
-        var video_active = document.getElementById("compVideo" + activeVidID);
-        var video_hidden = document.getElementById("compVideo" + (1 - activeVidID));
-        video_active.src = "videos/comparison/" + pill + "_" + method + "_vs_ours_" + mode + ".mp4";
-        video_active.load();
-
-        if (n_views) {
-            viewNum.innerHTML = n_views;
-        }
-    }
-</script>
 
 </head>
 
@@ -308,26 +230,20 @@
                     Comparisons
                 </h3>
 
-                <div class="text-center">
-                    <div class="pill-row" id="method-pills">
-                <span> Compare to: </span>
-                        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
-                        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
-                        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
-                        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
-                        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
-                    </div>
-                    <!-- <div class="pill-row" id="mode-pills">
-                        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                            RGB
-                        </span>
-                        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                            Depth
-                        </span>
-                    </div> -->
+                <div class="text-center ">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill active" data-value="zipnerf"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>Zip-NeRF</a></li>
+                        <li class="method-pill" data-value="diffusionerf"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>DiffusioNeRF</a></li>
+                        <li class="method-pill" data-value="freenerf"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>FreeNeRF</a></li>
+                        <li class="method-pill" data-value="simplenerf"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>SimpleNeRF</a></li>
+                        <li class="method-pill" data-value="zeronvs"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>ZeroNVS</a></li>
+                    </ul>
                 </div>
-                <!-- </div>
-                </div> -->
 
                 <script>
                     activeMethodPill = document.querySelector('.method-pill.active-pill');
@@ -335,16 +251,6 @@
                     activeModePill = document.querySelector('.mode-pill.active-pill');
                 </script>
                 
-                <!-- <div class="switch-container-wrapper">
-                    <div class="switch-container">
-                        <span class="switch-label">RGB</span>
-                        <label class="switch">
-                            <input type="checkbox" id="compVideoSwitch" onclick="selectCompVideo(activeMethodPill, activeScenePill)">
-                            <div class="slider round"></div>
-                        </label>
-                        <span class="switch-label">Depth</span>
-                    </div>
-                </div> -->
                 <div class="text-center">
                     <div class="video-container">
                         <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted>
@@ -353,32 +259,24 @@
                         <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
                             <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
                         </video>
-
-
-                        <div class="overlay" style="top: 0%; left: 47.5%;">
-                            <span id="compVideoValue">9</span> views
-                        </div>
-
-                        <div class="overlay"  style="top: 88%; left: 46.5%; padding: 2px; color: black;" id="mode-pills">
-                            <span class="pill mode-pill active-pill" style="padding: 0px; margin: 0px;" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                    </div>
+                    <div class="text-center" style="color: black;" id="mode-pills">
+                        <div class="btn-group btn-group-sm">
+                            <span class="btn btn-primary mode-pill active" data-value="rgb"
+                                onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
                                 RGB
                             </span>
-                            <span class="pill mode-pill" style="padding: 0px; margin: 0px;" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                            <span class="btn btn-primary mode-pill" data-value="depth"
+                                onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
                                 Depth
                             </span>
                         </div>
                     </div>
 
-                    <!-- <video class="video" height="280px" id="compVideo0" loop playsinline autoplay muted controls>
-                        <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
-                    </video>
-                    <video class="video" height="280px" id="compVideo1" loop playsinline autoplay muted controls hidden>
-                        <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
-                    </video> -->
-                    <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
+
+
                     <p class="text-justify" style="text-align: center;">
-                        Baseline method (left) vs ReconFusion (right).
-                        <!-- <br><span id="compVideoValue" style="color: red;">9</span> input views. -->
+                        Baseline method (left) vs ReconFusion (right). Scene trained on <span id="compVideoValue">9</span> views.
                     </p>
                     <script>
                         video0 = document.getElementById("compVideo0");
@@ -403,7 +301,7 @@
                         });
                     </script>
 
-                    <div class="pill-row" id="scene-pills">
+                    <div class="pill-row scene-pills" id="scene-pills">
                         <span class="pill scene-pill" data-value="dtu_scan31" onclick="selectCompVideo(activeMethodPill, this, 3)">
                             <img class="thumbnail-img" src="thumbnails/dtu_scan31_thumbnail.jpg" alt="DTU/scan31" width="64">
                         </span>
@@ -428,7 +326,7 @@
                         <span class="pill scene-pill" data-value="co3d_plant_188_20319_36755" onclick="selectCompVideo(activeMethodPill, this, 6)">
                             <img class="thumbnail-img" src="thumbnails/co3d_plant_188_20319_36755_thumbnail.jpg" alt="CO3D/plant" width="64">
                         </span>
-                        <span class="pill scene-pill active-pill" data-value="mipnerf360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 9)">
+                        <span class="pill scene-pill active" data-value="mipnerf360_bonsai" onclick="selectCompVideo(activeMethodPill, this, 9)">
                             <img class="thumbnail-img" src="thumbnails/mipnerf360_bonsai_thumbnail.jpg" alt="mip-NeRF 360/bonsai" width="64">
                         </span>
                         <span class="pill scene-pill" data-value="mipnerf360_kitchen" onclick="selectCompVideo(activeMethodPill, this, 9)">
