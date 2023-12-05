@@ -524,21 +524,21 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Ablation study
+                    Consistent 3D models from inconsistent diffusion samples
                 </h3>
                 
                 <table style="margin-left: auto; margin-right: auto; width: 90%;">
                     <tr>
                       <th style="width: 10px;"></th>
-                      <th style="text-align: center;width: 250px;">\(\texttt{Pose}\)</th>
-                      <th style="text-align: center;width: 250px;">\(\texttt{w/o PT}\)</th>
-                      <th style="text-align: center;width: 250px;">\(\texttt{Ours}\)</th>
+                      <th style="text-align: center;width: 250px;">LLFF (3 views)</th>
+                      <th style="text-align: center;width: 250px;">CO3D (6 views)</th>
+					  <th style="text-align: center;width: 250px;">mip-NeRF 360 (9 views)</th>
                     </tr>
                     <tr>
                       <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">Reconstructed NeRF</td>
                       <td rowspan="2" colspan="3">
                         <video class="video" width=100% loop playsinline autoplay muted controls>
-                            <source src="videos/ablation/ablation_grid.mp4" />
+                            <source src="videos/ablation/recon_vs_samples.mp4" />
                         </video>
                       </td>
                       <!-- <td style="text-align: center;">
@@ -578,9 +578,7 @@
                 </table>
 
                 <p class="text-justify" style="width: 85%; margin: auto;">
-                    Ablation of our diffusion model on 3-view reconstruction.
-                    \(\texttt{Pose}\): uses a pose conditioning similar to ZeroNVS.
-                    \(\texttt{w/o PT}\): trains the diffusion model from scratch without pretrained weights.
+                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model samples that are not multiview consistent (bottom). 
                 </p>
             </div>
         </div>
