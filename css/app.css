@@ -304,3 +304,55 @@ input:checked + .slider:after
 /* .mode-pills > .active {
   background: #1772d0;
 } */
+
+.button {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    font-family: 'Noto Sans', sans-serif;
+    font-style: inherit;
+    font-weight: inherit;
+    box-sizing: inherit;
+    text-decoration: none;
+    user-select: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    box-shadow: none;
+    display: inline-flex;
+    height: 2.5em;
+    line-height: 1.5;
+    position: relative;
+    vertical-align: top;
+    border-width: 1px;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(.5em - 1px);
+    padding-top: calc(.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #363636;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 290486px;
+    padding-left: calc(1em + .25em);
+    padding-right: calc(1em + .25em);
+  }
+
+
+.link-block {
+      -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    color: #4a4a4a;
+    font-size: 1em;
+    line-height: 1.5;
+    font-family: 'Noto Sans', sans-serif;
+    text-align: center!important;
+    box-sizing: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+  }
