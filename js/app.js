@@ -56,24 +56,6 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
     var videoSwitch = document.getElementById("compVideoSwitch");
     var viewNum = document.getElementById("compVideoValue");
 
-    $('.method-pill').each(function(e){
-        if ($(this).hasClass("active")) {
-            activeMethodPill = this;
-        };
-    })
-
-    $('.scene-pill').each(function(e){
-        if ($(this).hasClass("active")) {
-            activeScenePill = this;
-        };
-    })
-
-    $('.mode-pill').each(function(e){
-        if ($(this).hasClass("active")) {
-            activeScenePill = this;
-        };
-    })
-
     if (activeMethodPill) {
         activeMethodPill.classList.remove("active");
     }
