@@ -45,7 +45,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script src="js/app.js"></script>
-    <script src="js/video_comparison.js"></script>
+    <script src="js/synced_video_selector.js"></script>
 
 <style>
     .thumbnail-img {
@@ -126,7 +126,8 @@
 </head>
 
 <body>
-    <div class="container-lg" id="main">
+    <div class="container-lg" style="max-width: 1500px; margin: auto;" id="main">
+    <!-- <div class="container" id="main"> -->
         <div class="row">
             <h2 class="col-md-12 text-center">
                 <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
@@ -297,40 +298,32 @@
                     Comparisons
                 </h3>
 
-<div class="text-center">
-    <div class="pill-row" id="method-pills">
-   <span> Compare to: </span>
-        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
-        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
-        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
-        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
-        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
-    </div>
-    <!-- <div class="pill-row" id="mode-pills">
-        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-            RGB
-        </span>
-        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-            Depth
-        </span>
-    </div> -->
-    </div>
-    </div>
-</div>
+                <div class="text-center">
+                    <div class="pill-row" id="method-pills">
+                <span> Compare to: </span>
+                        <span class="pill method-pill active-pill" data-value="zipnerf" onclick="selectCompVideo(this, activeScenePill)">Zip-NeRF</span>
+                        <span class="pill method-pill" data-value="diffusionerf" onclick="selectCompVideo(this, activeScenePill)">DiffusioNeRF</span>
+                        <span class="pill method-pill" data-value="freenerf" onclick="selectCompVideo(this, activeScenePill)">FreeNeRF</span>
+                        <span class="pill method-pill" data-value="simplenerf" onclick="selectCompVideo(this, activeScenePill)">SimpleNeRF</span>
+                        <span class="pill method-pill" data-value="zeronvs" onclick="selectCompVideo(this, activeScenePill)">ZeroNVS</span>
+                    </div>
+                    <!-- <div class="pill-row" id="mode-pills">
+                        <span class="pill mode-pill active-pill" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                            RGB
+                        </span>
+                        <span class="pill mode-pill" data-value="depth" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                            Depth
+                        </span>
+                    </div> -->
+                </div>
+                <!-- </div>
+                </div> -->
 
-<script>
-    activeMethodPill = document.querySelector('.method-pill.active-pill');
-    activeScenePill = document.querySelector('.scene-pill.active-pill');
-    activeModePill = document.querySelector('.mode-pill.active-pill');
-</script>
-</div>
-</div>
-
-<script>
-    activeMethodPill = document.querySelector('.method-pill.active-pill');
-    activeScenePill = document.querySelector('.scene-pill.active-pill');
-    activeModePill = document.querySelector('.mode-pill.active-pill');
-</script>
+                <script>
+                    activeMethodPill = document.querySelector('.method-pill.active-pill');
+                    activeScenePill = document.querySelector('.scene-pill.active-pill');
+                    activeModePill = document.querySelector('.mode-pill.active-pill');
+                </script>
                 
                 <!-- <div class="switch-container-wrapper">
                     <div class="switch-container">
@@ -352,11 +345,11 @@
                         </video>
 
 
-                        <div class="overlay" style="top: 0%; left: 48.5%;">
+                        <div class="overlay" style="top: 0%; left: 47.5%;">
                             <span id="compVideoValue">9</span> views
                         </div>
 
-                        <div class="overlay"  style="top: 88%; left: 47.5%; padding: 2px; color: black;" id="mode-pills">
+                        <div class="overlay"  style="top: 88%; left: 46.5%; padding: 2px; color: black;" id="mode-pills">
                             <span class="pill mode-pill active-pill" style="padding: 0px; margin: 0px;" data-value="rgb" onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
                                 RGB
                             </span>
@@ -458,12 +451,10 @@
                 <br>
     
                 <div class="text-center">
-                    <video class="video" width="100%" id="sparsityVideo0" loop playsinline autoplay muted controls>
-                        <source src="videos/sparsity/kitchenlego_3.mp4" type="video/mp4" />
-                    </video>
-                    <video class="video" width="100%" id="sparsityVideo1" loop playsinline autoplay muted controls hidden>
-                        <source src="videos/sparsity/kitchenlego_6.mp4" type="video/mp4" />
-                    </video>
+                    <div class="video-compare-container" id="materialsDiv">
+                        <video class="video" id="sparsity" loop playsinline autoPlay muted src="videos/sparsity/stacked_vid.mp4" onplay="resizeAndPlay(this)"></video>
+                        <canvas height=0 class="videoMerge" id="sparsityMerge"></canvas>
+                    </div>
                     <!-- <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas> -->
                     <div class="slider-container" style="padding-left: 12%; padding-right: 11%;">
                         <input type="range" class="styled-slider" id="sparsitySlider" min="0" max="6" step="1" value="0" list="slider-labels">
@@ -489,42 +480,6 @@
                             <td width="10%">81</td>
                         </tr>
                     </table>
-                    <script>
-                        var activeSparistyVideoID = 0;
-                        var initSparsity = true;
-
-                        sp_video0 = document.getElementById("sparsityVideo0");
-                        sp_video1 = document.getElementById("sparsityVideo1");
-                        sp_video0.addEventListener('loadedmetadata', function() {
-                            if (activeSparistyVideoID == 0 && !initSparsity){
-                                sp_video0.play();
-                                sp_video0.hidden = false;
-                                sp_video1.hidden = true;
-                            }
-                        });
-                        sp_video1.addEventListener('loadedmetadata', function() {
-                            if (activeSparistyVideoID == 1 && !initSparsity){
-                                sp_video1.play();
-                                sp_video0.hidden = true;
-                                sp_video1.hidden = false;
-                            }
-                        });
-
-                        // Add an event listener for the slider's input change
-                        const slider = document.getElementById('sparsitySlider');
-                        const array = [3, 6, 9, 18, 27, 54, 81];
-                        slider.addEventListener('input', () => {
-                            const sliderValue = slider.value;
-                            const n_views = array[sliderValue];
-                            // Update the video source
-                            initSparsity = false;
-                            activeSparistyVideoID = 1 - activeSparistyVideoID;
-                            var video_active = document.getElementById("sparsityVideo" + activeSparistyVideoID);
-                            video_active.src = "videos/sparsity/kitchenlego_" + n_views + ".mp4";
-                            video_active.load();
-                            video_active.play();
-                        });
-                    </script>
                     <!-- <div class="text-center">
                         Rendered video under <span id="sparsityValue" style="color: red;">3</span> views
                     </div> -->
