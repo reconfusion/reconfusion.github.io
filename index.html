@@ -343,12 +343,13 @@
             </div>
         </div>
         <br>
+        <br>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
 				  Improves 3D reconstruction across wide range of input images
-                </h3>
+                </h3><br>
                 <!-- <p class="text-justify" style="color:red">
                     Hover over the plot to show rendered video under different number of views.
                 </p> -->
@@ -357,6 +358,9 @@
                 <canvas id="sparsityChart" style="max-height: 300px; max-width: 500px; margin: auto;"></canvas>
                 <script src="js/sparsity_chart.js"></script>
                 <br>
+                <p class="text-center">
+                    Our diffusion prior improves performance over the Zip-NeRF baseline from few (3) to many (81) input views. <br><br><u>Try the demo below! Move the slider to adjust the number of input views.</u>
+                </p>
     
                 <div class="text-center">
                     <div class="video-compare-container" id="materialsDiv">
@@ -364,6 +368,7 @@
                         <canvas height=0 class="videoMerge" id="sparsityMerge"></canvas>
                     </div>
                     <!-- <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas> -->
+			<em>Play with the slider to adjust the number of views. The left column shows the nearest input view.</em>
                     <div class="slider-container" style="padding-left: 12%; padding-right: 11%;">
                         <input type="range" class="styled-slider" id="sparsitySlider" min="0" max="6" step="1" value="0" list="slider-labels">
                         <datalist id="slider-labels">
@@ -378,7 +383,7 @@
                     </div>
                     <table style="text-align: left; padding-left: 0px; padding-right: 10%; width: 100%;">
                         <tr>
-                            <th width="10%"># views</th>
+                            <th width="10%"></th>
                             <td width="10%">3</td>
                             <td width="10%">6</td>
                             <td width="10%">9</td>
@@ -387,7 +392,7 @@
                             <td width="10%">54</td>
                             <td width="10%">81</td>
                         </tr>
-                    </table>
+                    </table><br>
                     <!-- <div class="text-center">
                         Rendered video under <span id="sparsityValue" style="color: red;">3</span> views
                     </div> -->
@@ -412,10 +417,7 @@
                       <td style="text-align: center;">Rendered video under <span id="sparsityValue" style="color: red;">3</span> views</td>
                     </tr>
                 </table> -->
-
-                <p class="text-justify">
-                    Our diffusion prior improves performance over the Zip-NeRF baseline from a few (3) to many (81) input views. On the left we show the nearest photo (bottom) and the location of photos (top).
-                </p>
+<br>
             </div>
         </div>
 
@@ -423,7 +425,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h3>
                     Distills consistent 3D model from inconsistent samples
-                </h3>
+                </h3><br>
                 
                 <table style="margin-left: auto; margin-right: auto; width: 90%;">
                     <tr>
@@ -476,7 +478,7 @@
                 </table>
 
                 <p class="text-justify" style="width: 85%; margin: auto;">
-                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model whose independent image samples are not multiview consistent (bottom) throught a multistep diffusion loss function.
+                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model that produces image samples independently for each viewpoint (bottom). These samples are not multiview consistent, but when used as a prior in optimization, can produce high-quality 3D reconstructions.
                 </p>
             </div>
         </div>
