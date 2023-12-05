@@ -40,8 +40,17 @@ function resizeAndPlay(videoElement, targetHeight = 2000) {
 
   console.log(sliderValue)
 
-  canvas.width = targetHeight / videoElement.videoHeight * videoElement.videoWidth;
-  canvas.height = targetHeight / 7;
+  function resizerbin() {
+    const videoWidth = videoElement.videoWidth;
+    const videoHeight = videoElement.videoHeight / 7;
+    const canvasWidth = container.width();
+    const canvasHeight = canvasWidth * videoHeight / videoWidth;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+  }
+
+  resizerbin();
+
   videoElement.play();
   videoElement.style.height = "0px";  // Hide video without stopping it
 
@@ -49,12 +58,5 @@ function resizeAndPlay(videoElement, targetHeight = 2000) {
 
   console.log(canvas);
 
-  $(window).on('resize', function (e) {
-    const videoWidth = videoElement.videoWidth;
-    const videoHeight = videoElement.videoHeight / 7;
-    const canvasWidth = container.width();
-    const canvasHeight = canvasWidth * videoHeight / videoWidth;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-  });
+  $(window).on('resize', resizerbin);
 }
