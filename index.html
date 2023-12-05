@@ -26,7 +26,7 @@
     <meta name="twitter:image" content="https://jonbarron.info/zipnerf/img/teaser.jpg" />
 
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤔</text></svg>">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -210,7 +210,7 @@
                     <ul class="nav nav-pills nav-justified">
                         <li>
                             <a href="https://arxiv.org/#">
-                            <image src="img/#.jpg" height="60px">
+                            <image src="img/tinypaper.jpg" height="60px">
                                 <h4><strong>Paper</strong></h4>
                             </a>
                         </li>
@@ -347,10 +347,10 @@
                 </div> -->
                 <div class="text-center">
                     <div class="video-container">
-                        <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted controls>
+                        <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted>
                             <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_rgb.mp4" />
                         </video>
-                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted controls hidden>
+                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
                             <source src="videos/comparison/mipnerf360_bonsai_zipnerf_vs_ours_depth.mp4" />
                         </video>
 
@@ -377,7 +377,7 @@
                     </video> -->
                     <!-- <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas> -->
                     <p class="text-justify" style="text-align: center;">
-                        Baseline method (left) vs our ReconFusion (right).
+                        Baseline method (left) vs ReconFusion (right).
                         <!-- <br><span id="compVideoValue" style="color: red;">9</span> input views. -->
                     </p>
                     <script>
@@ -516,7 +516,7 @@
                 </table> -->
 
                 <p class="text-justify">
-                    Our learned diffusion prior improves performance over the Zip-NeRF baseline up to as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset.
+                    Our learned diffusion prior improves performance over the Zip-NeRF baseline with as many as 81 input views on the kitchenlego scene from the mip-NeRF 360 dataset.
                 </p>
             </div>
         </div>
@@ -599,7 +599,7 @@
 			Keunhong Park and Ruiqi Gao and Daniel Watson and 
 			Pratul P. Srinivasan and Dor Verbin and Jonathan T. Barron 
 			and Ben Poole and Aleksander Holynski},
-    journal={arxiv},
+    journal={arXiv},
     year={2023}
 }</textarea>
                 </div>
@@ -612,7 +612,7 @@
                     Acknowledgements
                 </h3>
                 <p class="text-justify">
-                Thanks to 
+                We would like to thank Arthur Brussee, Ricardo Martin-Brualla, Rick Szeliski, Peter Hedman, Jason Baldridge for their valuable contributions in discussing the project and reviewing the manuscript, and Zhicheng Wang for setting up some of the data loaders necessary for our diffusion model training pipeline. We are grateful to Randy Persaud and Henna Nandwani for infrastructure support.
                     <br><br>
                 The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
                 </p>
