@@ -219,7 +219,8 @@
                 <video id="co3d-grid" width="100%" autoplay loop muted controls>
                   <source src="videos/results/co3d_3x5.mp4" type="video/mp4" />
                 </video>
-                    <p class="text-justify" style="text-align: center;">ReconFusion generalizes to everyday scenes: the same model is used for all results on this page.</p>
+                <br>
+                    <p class="text-justify" style="text-align: center;">ReconFusion generalizes to everyday scenes: the same diffusion model prior is used for <b>all</b> reconstruction results.</p>
 			</div>
         </div>
 
@@ -275,7 +276,7 @@
                     </div>
 
 
-
+                    <br>
                     <p class="text-justify" style="text-align: center;">
                         Baseline method (left) vs ReconFusion (right). Scene trained on <span id="compVideoValue">9</span> views. Try selecting different methods and scenes!
                     </p>
@@ -349,7 +350,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-				  ReconFusion improves 3D reconstruction across wide range of input images
+				  ReconFusion improves both few-view and many-view reconstruction
                 </h3><br>
                 <!-- <p class="text-justify" style="color:red">
                     Hover over the plot to show rendered video under different number of views.
@@ -360,7 +361,7 @@
                 <script src="js/sparsity_chart.js"></script>
                 <br>
                 <p class="text-center">
-                    Our diffusion prior improves performance over the Zip-NeRF baseline from few (3) to many (81) input views. <br><br><u>Try the demo below! Move the slider to adjust the number of input views.</u>
+                    Our diffusion prior improves performance over baseline Zip-NeRF in both the few-view and many-view sampling regimes.
                 </p>
     
                 <div class="text-center">
@@ -369,7 +370,7 @@
                         <canvas height=0 class="videoMerge" id="sparsityMerge"></canvas>
                     </div>
                     <!-- <canvas height=0 class="videoWrapper" id="sparsityVideoWrapper"></canvas> -->
-			<em>Play with the slider to adjust the number of views. The left column shows the nearest input view.</em>
+			<em>Move the slider to adjust the number of views. The left column shows the nearest input view.</em>
                     <div class="slider-container" style="padding-left: 12%; padding-right: 11%;">
                         <input type="range" class="styled-slider" id="sparsitySlider" min="0" max="6" step="1" value="0" list="slider-labels">
                         <datalist id="slider-labels">
@@ -425,7 +426,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    ReconFusion distills consistent 3D model from inconsistent samples
+                    ReconFusion distills a consistent 3D model from inconsistent samples
                 </h3><br>
                 
                 <table style="margin-left: auto; margin-right: auto; width: 90%;">
@@ -477,9 +478,11 @@
                       </td> -->
                     </tr>
                 </table>
-
-                <p class="text-justify" style="width: 85%; margin: auto;">
-                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model that produces image samples independently for each viewpoint (bottom). These samples are not multiview consistent, but when used as a prior in optimization, can produce high-quality 3D reconstructions.
+                <br>
+<!-- 
+                <p class="text-justify" style="width: 85%; margin: auto;"> -->
+                <p class="text-justify" margin: auto;">
+                    ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model that produces image samples independently for each viewpoint (bottom). These samples are not multiview consistent, but can produce high-quality 3D reconstructions when used as a prior in optimization.
                 </p>
             </div>
         </div>
