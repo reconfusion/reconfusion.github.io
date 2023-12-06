@@ -336,23 +336,32 @@ input:checked + .slider:after
     background-color: #363636;
     border-color: transparent;
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.4rem;
     border-radius: 290486px;
     padding-left: calc(1em + .25em);
     padding-right: calc(1em + .25em);
   }
 
-
-.link-block {
+.button .icon {
       -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
-    color: #4a4a4a;
-    font-size: 1em;
-    line-height: 1.5;
     font-family: 'Noto Sans', sans-serif;
-    text-align: center!important;
+    user-select: none;
+    line-height: 1.5;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 1rem;
     box-sizing: inherit;
     font-style: inherit;
     font-weight: inherit;
-  }
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5em;
+    width: 1.5em;
+    margin-left: calc(-.5em - 1px);
+    margin-right: .25em;
+}
