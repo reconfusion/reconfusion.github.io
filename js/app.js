@@ -6,47 +6,21 @@ var activeVidID = 0;
 var select = false;
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     var editor = CodeMirror.fromTextArea(document.getElementById("bibtex"), {
         lineNumbers: false,
         lineWrapping: true,
-        readOnly:true
+        readOnly: true
     });
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
-    
-activeMethodPill = $('.method-pill').filter('.active')[0];
-activeModePill = $('.mode-pill').filter('.active')[0];
-activeScenePill = $('.scene-pill').filter('.active')[0];
 
-// var frameNumber = 0, // start video at frame 0
-//     // lower numbers = faster playback
-//     playbackConst = 500, 
-//     // get page height from video duration
-//     setHeight = document.getElementById("main"), 
-//     // select video element         
-//     vid = document.getElementById('v0'); 
-//     // var vid = $('#v0')[0]; // jquery option
+    activeMethodPill = $('.method-pill').filter('.active')[0];
+    activeModePill = $('.mode-pill').filter('.active')[0];
+    activeScenePill = $('.scene-pill').filter('.active')[0];
 
-    
-    
-
-// // Use requestAnimationFrame for smooth playback
-// function scrollPlay(){  
-//   var frameNumber  = window.pageYOffset/playbackConst;
-//   vid.currentTime  = frameNumber;
-//   window.requestAnimationFrame(scrollPlay);
-// console.log('scroll');
-// }
-    
-// // dynamically set the page height according to video length
-// vid.addEventListener('loadedmetadata', function() {
-//   setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
-// });
-    
-    
-//     window.requestAnimationFrame(scrollPlay);
+    resizeAndPlay($('#sparsity')[0]);
 });
 
 function selectCompVideo(methodPill, scenePill, n_views, modePill) {
