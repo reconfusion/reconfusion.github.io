@@ -215,7 +215,7 @@
                     (a) We optimize a NeRF to minimize a reconstruction loss \(\mathcal{L}_\mathrm{recon}\) between renderings and a few input images, as well as a sample loss \(\mathcal{L}_\mathrm{sample}\) between a rendering from a random pose and an image predicted by a diffusion model for that pose. (b) To generate the sample image, we use a PixelNeRF-style model to fuse information from the input images and to render a predicted feature map corresponding to the sample view camera pose. (c) This feature map is concatenated with the noisy latent (computed from the current NeRF rendering at that pose) and is provided to a diffusion model, which additionally uses CLIP embeddings of the input images via cross-attention. The resulting decoded output sample is used to enforce an image-space loss on the corresponding NeRF rendering (\(\mathcal{L}_\mathrm{sample}\)).
                 </p>
             </div>
-        </div>
+        </div><br><br>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 		<h3> ReconFusion enables high-quality 3D reconstruction from few views</h3><br>
@@ -426,7 +426,7 @@
                 </table> -->
 <br>
             </div>
-        </div>
+        </div><br><br>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -436,14 +436,14 @@
                 
                 <table style="margin-left: auto; margin-right: auto; width: 90%;">
                     <tr>
-                      <th style="width: 10px;"></th>
-                      <th style="text-align: center;width: 250px;">LLFF (3 views)</th>
-                      <th style="text-align: center;width: 250px;">CO3D (6 views)</th>
-					  <th style="text-align: center;width: 250px;">mip-NeRF 360 (9 views)</th>
+                      <th style="width: 4%;"></th>
+                      <th style="text-align: center;width: 32%;">LLFF (3 views)</th>
+                      <th style="text-align: center;width: 32%;">CO3D (6 views)</th>
+					  <th style="text-align: center;width: 32%;">mip-NeRF 360 (9 views)</th>
                     </tr>
                     <tr>
-                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">3D Reconstruction</td>
-                      <td rowspan="2" colspan="3">
+                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg); width:4%">3D Reconstruction</td>
+                      <td rowspan="2" colspan="3" style="width: 96%">
                         <video class="video" width=100% loop playsinline autoplay muted controls>
                             <source src="videos/ablation/recon_vs_samples.mp4" />
                         </video>
@@ -465,7 +465,7 @@
                       </td> -->
                     </tr>
                     <tr>
-					  <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td>
+					  <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg); width:4%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td>
                       <!-- <td style="text-align: center;">
                         <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
                             <source src="videos/ablation/z123_samples.mp4" />
@@ -486,11 +486,12 @@
                 <br>
 <!-- 
                 <p class="text-justify" style="width: 85%; margin: auto;"> -->
-                <p class="text-justify" style="margin: auto;">
+                <p class="text-justify" style="margin: auto; width:70%">
                     ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model that produces image samples independently for each viewpoint (bottom). These samples are not multiview consistent, but can produce high-quality 3D reconstructions when used as a prior in optimization.
                 </p>
             </div>
         </div>
+        <br>
         <br>
 
         <div class="row">
