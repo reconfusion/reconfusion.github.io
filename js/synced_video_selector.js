@@ -40,7 +40,7 @@ function resizeAndPlay(videoElement, targetHeight = 2000) {
 
   console.log(sliderValue)
 
-  function resizyyyyy() {
+  function resizerbin() {
     const videoWidth = videoElement.videoWidth;
     const videoHeight = videoElement.videoHeight / 7;
     const canvasWidth = container.width();
@@ -49,26 +49,16 @@ function resizeAndPlay(videoElement, targetHeight = 2000) {
     canvas.height = canvasHeight;
   }
 
-  resizyyyyy();
+  resizerbin();
 
-  console.log('play when ready', videoElement)
-  if (videoElement.readyState >= 3) {
-    videoElement.play();
-  } else if (!self.readyStateListenerAttached) {
-    document.addEventListener('readystatechange', function () {
-      if (videoElement.readyState >= 3) {
-        videoElement.play();
-      }
-    });
-  }
-
+  videoElement.play();
   videoElement.style.height = "0px";  // Hide video without stopping it
 
   playVids(videoElement.id, container, targetHeight);
 
   console.log(canvas);
 
-  $(window).on('resize', resizyyyyy);
+  $(window).on('resize', resizerbin);
 }
 
 

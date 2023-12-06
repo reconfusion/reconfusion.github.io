@@ -11,10 +11,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:image" content="https://jonbarron.info/zipnerf/img/nottingham.jpg">
+    <meta property="og:image" content="https://reconfusion.github.io/img/overview_combined.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1296">
-    <meta property="og:image:height" content="840">
+    <meta property="og:image:width" content="1711">
+    <meta property="og:image:height" content="576">
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://reconfusion.github.io/"/>
     <meta property="og:title" content="ReconFusion: 3D Reconstruction with Diffusion Priors" />
@@ -23,7 +23,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ReconFusion: 3D Reconstruction with Diffusion Priors" />
     <meta name="twitter:description" content="3D reconstruction methods such as Neural Radiance Fields (NeRFs) excel at rendering photorealistic novel views of complex scenes. However, recovering a high-quality NeRF typically requires tens to hundreds of input images, resulting in a time-consuming capture process. We present ReconFusion to reconstruct real-world scenes using only a few photos. Our approach leverages a diffusion prior for novel view synthesis, trained on synthetic and multiview datasets, which regularizes a NeRF-based 3D reconstruction pipeline at novel camera poses beyond those captured by the set of input images. Our method synthesizes realistic geometry and texture in underconstrained regions while preserving the appearance of observed regions. We perform an extensive evaluation across various real-world datasets, including forward-facing and 360-degree scenes, demonstrating significant performance improvements over previous few-view NeRF reconstruction approaches."/>
-    <meta name="twitter:image" content="https://jonbarron.info/zipnerf/img/teaser.jpg" />
+    <meta name="twitter:image" content="https://reconfusion.github.io/img/overview_combined.png" />
 
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤔</text></svg>">
@@ -32,7 +32,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/fontawesome.all.min.css">
+	<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
+
+	<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-8ZERS5BVPS');
+  </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
@@ -40,6 +53,7 @@
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
+	<script defer src="js/fontawesome.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script src="js/app.js"></script>
@@ -47,16 +61,18 @@
 
 </head>
 
-<body>
-    <div class="container-lg" style="max-width: 1500px; margin: auto;" id="main">
+<body style="padding: 5%; width: 100%">
+    <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
     <!-- <div class="container" id="main"> -->
         <div class="row">
             <h2 class="col-md-12 text-center">
                 <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
             </h2>
         </div>
-        <div class="row">
-            <div class="col-md-14 text-center">
+        <div class="row text-center">
+<div class="col-md-3">
+    </div>
+            <div class="col-md-6 text-center">
                 <ul class="list-inline">
                     <li>
                         <a href="https://www.cs.columbia.edu/~rundi/">
@@ -78,7 +94,7 @@
                             Keunhong Park
                         </a><sup>2</sup>
                     </li>
-                    <br>
+                    <wbr>
                     <li>
                         <a href="https://ruiqigao.github.io/">
                             Ruiqi Gao
@@ -99,7 +115,7 @@
                             Dor Verbin
                         </a><sup>2</sup>
                     </li>
-                    <br>
+                    <wbr>
                     <li>
                         <a href="https://jonbarron.info/">
                             Jonathan T. Barron
@@ -118,33 +134,29 @@
                     <!-- </br>Google -->
                 </ul>
             </div>
+<div class="col-md-3">
+    </div>
             <div class="col-md-12 text-center">
                 <sup>1</sup>Columbia University, &nbsp <sup>2</sup>Google Research, &nbsp <sup>3</sup>Google DeepMind
 
             </div>
             <div class="col-md-12 text-center">
-                * Denotes equal contribution
+                * equal contribution
             </div> </div>
 
 
-        <div class="row">
-                <div class="col-md-4 col-md-offset-4 text-center">
-                    <ul class="nav nav-pills nav-justified">
-                        <li>
-                            <a href="https://arxiv.org/#">
-                            <image src="img/tinypaper.jpg" height="60px">
-                                <h4><strong>Paper</strong></h4>
-                            </a>
-                        </li>
-                        <!--<li>
-                            <a href="https://www.youtube.com/">
-                            <image src="img/youtube_icon.png" height="60px">
-                                <h4><strong>Video</strong></h4>
-                            </a>
-                        </li>-->
-                    </ul>
-                </div>
-        </div>
+        <div class="row text-center">
+					
+			     <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.02981"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+			</div>
 
 
 
@@ -212,7 +224,7 @@
                     (a) We optimize a NeRF to minimize a reconstruction loss \(\mathcal{L}_\mathrm{recon}\) between renderings and a few input images, as well as a sample loss \(\mathcal{L}_\mathrm{sample}\) between a rendering from a random pose and an image predicted by a diffusion model for that pose. (b) To generate the sample image, we use a PixelNeRF-style model to fuse information from the input images and to render a predicted feature map corresponding to the sample view camera pose. (c) This feature map is concatenated with the noisy latent (computed from the current NeRF rendering at that pose) and is provided to a diffusion model, which additionally uses CLIP embeddings of the input images via cross-attention. The resulting decoded output sample is used to enforce an image-space loss on the corresponding NeRF rendering (\(\mathcal{L}_\mathrm{sample}\)).
                 </p>
             </div>
-        </div>
+        </div><br><br>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 		<h3> ReconFusion enables high-quality 3D reconstruction from few views</h3><br>
@@ -238,6 +250,8 @@
                             onclick="selectCompVideo(this, activeScenePill)"><a>Zip-NeRF</a></li>
                         <li class="method-pill" data-value="diffusionerf"
                             onclick="selectCompVideo(this, activeScenePill)"><a>DiffusioNeRF</a></li>
+                    </ul>
+                    <ul class="nav nav-pills center-pills">
                         <li class="method-pill" data-value="freenerf"
                             onclick="selectCompVideo(this, activeScenePill)"><a>FreeNeRF</a></li>
                         <li class="method-pill" data-value="simplenerf"
@@ -421,24 +435,24 @@
                 </table> -->
 <br>
             </div>
-        </div>
+        </div><br><br>
 
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2 text-center">
                 <h3>
                     ReconFusion distills a consistent 3D model from inconsistent samples
                 </h3><br>
                 
                 <table style="margin-left: auto; margin-right: auto; width: 90%;">
                     <tr>
-                      <th style="width: 10px;"></th>
-                      <th style="text-align: center;width: 250px;">LLFF (3 views)</th>
-                      <th style="text-align: center;width: 250px;">CO3D (6 views)</th>
-					  <th style="text-align: center;width: 250px;">mip-NeRF 360 (9 views)</th>
+                      <th style="width: 4%;"></th>
+                      <th style="text-align: center;width: 32%;">LLFF (3 views)</th>
+                      <th style="text-align: center;width: 32%;">CO3D (6 views)</th>
+					  <th style="text-align: center;width: 32%;">mip-NeRF 360 (9 views)</th>
                     </tr>
                     <tr>
-                      <td class="distill-row">Reconstructed NeRF</td>
-                      <td rowspan="2" colspan="3">
+                      <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg); width:4%">3D Reconstruction</td>
+                      <td rowspan="2" colspan="3" style="width: 96%">
                         <video class="video" width=100% loop playsinline autoplay muted controls>
                             <source src="videos/ablation/recon_vs_samples.mp4" />
                         </video>
@@ -460,7 +474,7 @@
                       </td> -->
                     </tr>
                     <tr>
-                      <td class="distill-row"></td>Diffusion samples</td>
+					  <td style="text-align: center; writing-mode: vertical-lr; transform: rotate(180deg); width:4%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td>
                       <!-- <td style="text-align: center;">
                         <video class="video" width=100% loop playsinline autoplay muted style="max-height: 150px;">
                             <source src="videos/ablation/z123_samples.mp4" />
@@ -481,11 +495,12 @@
                 <br>
 <!-- 
                 <p class="text-justify" style="width: 85%; margin: auto;"> -->
-                <p class="text-justify" margin: auto;">
+                <p class="text-justify" style="width:85%; margin:auto">
                     ReconFusion recovers consistent 3D reconstructions (top) from a diffusion model that produces image samples independently for each viewpoint (bottom). These samples are not multiview consistent, but can produce high-quality 3D reconstructions when used as a prior in optimization.
                 </p>
             </div>
         </div>
+        <br>
         <br>
 
         <div class="row">
@@ -494,6 +509,7 @@
                     Citation
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
+				  <p class="text-justify">
                     <textarea id="bibtex" class="form-control" readonly>
 @article{wu2023reconfusion,
     title={ReconFusion: 3D Reconstruction with Diffusion Priors},
@@ -503,7 +519,7 @@
 			and Ben Poole and Aleksander Holynski},
     journal={arXiv},
     year={2023}
-}</textarea>
+	}</textarea></p>
                 </div>
             </div>
         </div>
