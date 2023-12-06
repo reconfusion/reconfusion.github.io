@@ -51,7 +51,18 @@ function resizeAndPlay(videoElement, targetHeight = 2000) {
 
   resizerbin();
 
-  videoElement.play();
+  console.log('play when ready', videoElement)
+  if (videoElement.readyState >= 3) {
+    videoElement.play();
+  } else if (!self.readyStateListenerAttached) {
+    document.addEventListener('readystatechange', function () {
+      if (videoElement.readyState >= 3) {
+        videoElement.play();
+      }
+    });
+  }
+
+  // videoElement.play();
   videoElement.style.height = "0px";  // Hide video without stopping it
 
   playVids(videoElement.id, container, targetHeight);
